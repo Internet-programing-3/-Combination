@@ -1,0 +1,1332 @@
+@charset "UTF-8";
+/* 수정 시엔 Ctrl+F로 수정할 페이지 이름 찾으시면 빠릅니다. */
+/* 폰트 연결 (워헤이븐 폰트 파일은 font 폴더 내에 있습니다) */
+	@font-face {
+		font-family: 'WarhavenBold';
+		font-style: normal;
+		font-weight: 700;
+		src: url("font/Warhaven_Bold.ttf") format("truetype");
+	}
+	@font-face{
+		font-family: 'DNFForgedBlade';
+		font-style:normal;
+		font-weight:300;
+		src:url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Light.otf')format('opentype');
+	}
+
+/* 공통 부분 */
+	body{
+		width: 98vw;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: 0 auto;
+		font-family: 'DNFForgedBlade';
+	}
+
+	ul, li{
+		list-style:none;
+	}
+
+	a{
+		text-decoration: none;
+		color: #000000;
+	}
+
+	header, footer{
+		width: 100%;
+		display: block;
+		overflow: hidden;
+		justify-content: center;
+		text-align: center;
+	}
+
+	header p{
+		height: 30px;
+		padding: 10px;
+		margin: 0;
+		font-family: 'WarhavenBold';
+		text-align: left;
+	}
+
+	header p a{
+		color: #41926E;
+	}
+
+	.navMainOne{
+		width: 900px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 5px;
+	}
+
+	.navMainOne img{
+		width: 50px;
+		height: 50px;
+		margin: 0;
+		padding: 0;
+	}
+
+	.todayMain{
+		width: 160px;
+		height: 80px;
+		display: flex;
+		padding-left: 20px;
+		text-align: top; 
+	}
+
+	.todayMain a{
+		display: flex;
+		color: #000000;
+	}
+
+	.todayMain img{
+		width: 50px;
+		height: 75px;
+		padding: 0;
+		margin-right: 5px;
+		box-shadow: 0px 3px 7px 0px #A3A2A2;
+	}
+
+	.todayMain h3{
+		margin: 0;
+		font-family: 'WarhavenBold';
+		font-size: 11pt;
+		word-spacing: -3px;
+		text-align: justify;
+	}
+
+	.todayMain p{
+		margin-top: 1px;
+		font-family: 'DNFForgedBlade';
+		font-size: 10pt;
+		text-align: left;
+	}
+
+	.searchMain{
+		display: flex;
+		height: 50px;
+		border: solid 3px #41926E;
+		padding: 0;
+		margin: 0 30px;
+	}
+
+	.searchMain input{
+		width: 300px;
+		height: 40px;
+		border: none;
+		padding: 0 10px 0 10px;
+		margin: 5px;
+	}
+
+	.searchMain button{
+		width: 70px;
+		height: 50px;
+		border: 0;
+		background-color: #41926E;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		font-size: 15pt;
+		color: #FFFFFF;
+		text-align: center;
+	}
+
+	.navMainTwo ul{
+		width: 900px;
+		display: flex;
+		justify-content: space-between;
+		padding: 0;
+	}
+
+	.navMainTwo img{
+		width: 120px;
+		height:120px
+	}
+
+	.footerMain{
+		display: flex;
+		margin: 50px;
+		font-size: 10pt;
+	}
+
+	.footerMain img{
+		width: 300px;
+		height: 100px;
+		padding: 0;
+	}
+
+	.footerMain p{
+		margin: 20px 30px;
+		text-align: left;
+	}
+
+/* Mainpage.jsp */
+	.btnMO{
+		width: 900px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 0;
+		padding: 0;
+	}
+
+	.btnMO li{
+		width: 210px;
+		height: 50px;
+		background-color: #FFFFFF;
+		border: 2px solid #41926E;
+		font-family: "WarhavenBold";
+		font-size: 20pt;
+		text-align: center;
+		line-height: 50px;
+		cursor: pointer;
+	}
+
+	.btnMO a{
+		color: #41926E;
+	}
+
+	.btnMO li.On{
+		background-color: #41926E;
+	}
+
+	.btnMO li.On a{
+		color: white;
+	}
+
+	.contMO{
+		width: 900px;
+		display: none;
+		background-color: #41926E;
+		padding: 0;
+		margin-top: -1.3px;
+	}
+
+	.contMO.On{
+		display: block;
+	}
+
+	.contMO table{
+		display: flex;
+		justify-content: space-around;
+		border: 0;
+		border-collapse: separate;
+		border-spacing: 90px 10px;
+		background-color: #41926E;
+		padding: 0;
+		float: center;
+		text-align: center;
+	}
+
+	.contMO p{
+		width: 130px;
+		height: 250px;
+		margin-top: 30px auto 5px auto;
+		font-size: 10pt;
+		word-spacing: -1.3px;
+		text-align: justify;
+	}
+
+	.contMO img{
+		width: 130px;
+		height: 195px;
+		box-shadow: 0px 3px 7px 0px #1B3C2D;
+		margin-bottom: 5px;
+	}
+
+	.contMO a{
+		color: white;
+	}
+
+	.MainTwo{
+		width: 900px;
+		display: block;
+		padding: 0;
+		margin: 50px;
+		font-family: 'WarhavenBold';
+	}
+
+	.MainTwo table{
+		display: flex;
+		justify-content: space-around;
+		border-collapse: separate;
+		border-spacing: 40px 10px;
+		border: 0;
+		background-color: #C1DBD0;
+		margin-bottom: 50px;
+	}
+
+	.MainTwo img{
+		width: 110px;
+		height: 165px;
+		box-shadow: 0px 3px 7px 0px #4E5A55;
+		margin: 10px;
+	}
+
+	.MainTwo table.event{
+		background-color: #C5EDE9;
+	}
+
+	.MainTwo table.event img{
+		box-shadow: 0px 3px 7px 0px #0E4E46;
+	}
+
+	.MainThree{
+		width: 100%;
+		display: flex;
+		overflow: hidden;
+		justify-content: center;
+		align-items: top;
+		background-color: #FFEEEE;
+		margin: 30px;
+		font-size: 13pt;
+	}
+
+	.MainThree h1, h4, p{
+		margin: 10px 0;
+	}
+
+	.MainThree h1{
+		font-family: 'WarhavenBold';
+	}
+
+	.MainThree img{
+		width: 200px;
+		height: 300px;
+		margin: 20px 15px;
+		box-shadow: 0px 3px 7px 0px #A3A2A2
+	}
+
+	.contMTh-01{
+		width: 200px;
+		color: #FF8787;
+		margin: 20px 15px;
+		word-spacing: -1px;
+		text-align: justify;
+	}
+
+	.contMTh-01 button{
+		width: 200px;
+		height: 50px;
+		background-color: #FF8787;
+		border: 1px solid #FF8787;
+		border-radius: 10px;
+		margin: 5px auto;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		color: white;
+	}
+
+	.contMTh-02{
+		width: 400px;
+		color: #000000;
+		margin: 20px 15px;
+		text-align: justify;
+	}
+
+	.notices{
+		width: 100%;
+		height: 50px;
+		float: center;
+		display: flex;
+		justify-content: space-around;
+		border-top: 1px solid #41926E;
+		border-bottom: 1px solid #41926E;
+		padding: 0;
+		margin-top: 50px;
+	}
+
+	.notices ul{
+		width: 100%;
+		display: flex;
+		justify-content: space-around;
+		overflow: auto;
+		padding: 0;
+	}
+
+	.notices li{
+		height: 40px;
+		padding: 0;
+		margin: 0 50px;
+		text-align: center;
+	}
+
+	.notices li h4{
+		margin: 0;
+		font-family: 'WarhavenBold';
+	}
+
+/* Login.jsp */
+	.LoginOne{
+		width: 600px;
+		margin: 0 auto;
+	}
+
+	.btnLogin{
+		display: flex;
+		justify-content: center;
+		margin: 30px auto;
+		padding: 0;
+	}
+
+	.btnLogin ul{
+		height: 50px;
+		display: flex;
+		padding: 0;
+	}
+
+	.btnLogin li{
+		width: 200px;
+		height: 50px;
+		border-bottom: 3px solid #FFFFFF;
+		font-family: "WarhavenBold";
+		font-size: 15pt;
+		text-align: center;
+		line-height: 50px;
+		cursor: pointer;
+	}
+
+	.btnLogin li a:hover{
+		color: #20B2AA;
+	}
+
+	.btnLogin li.On{
+		border-bottom: 3px solid #41926E;
+	}
+
+	.btnLogin li.On a{
+	color: #41926E;
+	}
+
+	.contLO{
+		width: 600px;
+		display: none;
+		margin: 0 auto;
+	}
+
+	.contLO.On{
+		display: block;
+	}
+
+	.mainLO{
+		display: block;
+		justify-content: center;
+		padding: 0;
+		margin: 0 auto;
+	}
+
+	.mainLO input{
+		width: 300px;
+		height: 40px;
+		display: flex;
+		border: 1px solid gray;
+		padding: 3px 15px;
+		margin: 0 auto;
+		font-family: 'DNFForgedBlade';
+		font-size: 11pt;
+	}
+
+	.mainLO button{
+		width: 333px;
+		height: 50px;
+		display: block;
+		border: 1px solid #41926E;
+		border-radius: 5px;
+		background-color: #41926E;
+		margin: 10px auto;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		font-size: 13pt;
+		color: #FFFFFF;
+	}
+
+	.mainLO button:hover{
+		border:#20B2AA;
+		background-color: #20B2AA;
+	}
+
+	.optLO{
+		width: 330px;
+		display: block;
+		justify-content: center;
+		margin: 0 auto;
+	}
+
+	.optLO #saveID{
+		vertical-align:middle;
+		padding: 0;
+		font-size: 10pt;
+	}
+
+	.subLO{
+		width: 400px;
+		justify-content: center;
+		border-bottom: 1px solid #B1D2C4;
+		padding-bottom: 30px;
+		margin: 30px auto;
+	}
+
+	.subLO button{
+		width: 333px;
+		height: 50px;
+		display: block;
+		border: 1px solid #41926E;
+		border-radius: 5px;
+		background-color: #FFFFFF;
+		margin: 10px auto;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		font-size: 13pt;
+		color: #41926E;
+	}
+
+	.subLO button:hover{
+		background-color: #E5F1EC;
+		color: #41926E;
+	}
+
+/* SingUp.jsp */
+	.SignMain{
+		width: 400px;
+		align-items: center;
+		border: solid 1px #41926E;
+		padding: 50px;
+		margin-bottom: 50px;
+	}
+
+	.SignMain h3{
+		margin-bottom: 3px;
+		font-family: 'WarhavenBold';
+	}
+
+	.SignMain h5{
+		color: #41926E;
+		text-align: center;
+		text-decoration: underline 1.5px;
+	}
+
+	.SignMain p{
+		padding: 0;
+		margin-bottom: 0;
+	}
+
+	.SignMain button{
+		width: 333px;
+		height: 50px;
+		display: block;
+		border: 1px solid #41926E;
+		border-radius: 5px;
+		margin: 10px auto;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		font-size: 13pt;
+	}
+
+	.SignMain button[type="submit"]{
+		background-color: #41926E;
+		color: #FFFFFF;
+	}
+
+	.SignMain button[type="submit"]:hover{
+		border:#20B2AA;
+		background-color: #20B2AA;
+	}
+
+	.SignMain button[type="reset"]{
+		background-color: #FFFFFF;
+		margin-bottom: 30px;
+		color: #41926E;
+	}
+
+	.SignMain button[type="reset"]:hover{
+		background-color: #E5F1EC;
+	}
+
+	.contSM{
+		padding: 0;
+		margin: 30px auto;
+	}
+
+	.contSM div{
+		width: 400px;
+		padding: 0 5px;
+		margin: 20px auto;
+		border-bottom: 1px solid;
+	}
+
+	.contSM h4{
+		margin-bottom: 0;
+		font-family: 'DNFForgedBlade';
+	}
+
+	.contSM input{
+		font-family: 'DNFForgedBlade';
+		font-size: 11pt;
+	}
+
+	.contSM p{
+		padding-left: 7px;
+		margin-top: -10px;
+		color: #41926E;
+		font-size: 10pt;
+	}
+
+	.contSM-01 input{
+		width: 200px;
+		height: 50px;
+		border: none;
+		outline: none;
+	}
+
+	.contSM-02 select{
+		width: 60px;
+		height: 30px;
+		margin: 13px 10px 13px auto;
+		font-family: 'DNFForgedBlade';
+		text-align: center;
+	}
+
+	.contSM-02 input[type="text"]{
+		width: 60px;
+		height: 25px;
+		margin: auto 5px;
+		text-align: center;
+	}
+
+	.contSM-02 input[type="text"]:focus{
+		text-align: left;
+	}
+
+	.contSM-03 input[type="text"]{
+		width: 100px;
+		height: 50px;
+		border: none;
+		outline: none;
+	}
+
+	.contSM-04 input{
+		width: 230px;
+		padding: 5px 5px;
+		margin: 13px auto;
+		text-align: left;
+	}
+
+	.contSM-05{
+		display: block;
+		justify-content: left;
+	}
+
+	.contSM-05 div{
+		border: none;
+		padding: 0;
+	}
+
+/* BookLIst.jsp */
+	.ListMain{
+		width: 900px;
+		display: flex;
+		justify-content: left;
+		padding: 0;
+	}
+
+	.ListMain aside{
+		width: 150px;
+		display: block;
+		padding: 0;
+		margin: 20px 50px;
+	}
+
+	.ListMain aside h2{
+		padding: 5px;
+		margin: 3px auto;
+		font-family: 'WarhavenBold';
+	}
+	
+	.ListMain aside ul{
+		padding: 5px;
+		margin: 0 auto;
+	}
+
+	.ListMain aside li{
+		width: 130px;
+		height: 30px;
+		padding: 0;
+		text-align: left;
+		line-height: 30px;
+	}
+
+	.ListMain aside li a:hover{
+		color: #20B2AA;
+	}
+
+	.ListMain aside li.On a{
+		color: #41926E;
+		font-weight: bold;
+		text-decoration: underline 1.5px;
+	}
+
+	.tabLM{
+		height: 50px;
+		display: flex;
+		justify-content: center;
+		font-family: 'WarhavenBold';
+		text-align: center;
+		line-height: 40px;
+	}
+
+	.tabLM p{
+		width: 80px;
+		margin: 5px 10px;
+		cursor: pointer;
+	}
+
+	.tabLM p:hover{
+		color: #20B2AA;
+	}
+
+	.tabLM p.On{
+		border-bottom: 2px solid #41926E;
+		color: #41926E;
+	}
+
+	.contLM{
+		display: flex;
+		justify-content: space-around;
+		border-bottom: 1px solid #CDE2D9;
+		padding-bottom: 30px;
+	}
+
+	.contLM img{
+		width: 150px;
+		height: 225px;
+		padding: 0;
+		margin: 30px auto;
+		box-shadow: 0px 3px 7px 0px #A3A2A2;
+	}
+
+	.infoLM{
+		padding-top: 20px;
+		margin: 0 20px;
+		text-align: justify;
+	}
+
+	.infoLM h3, h4, h5{
+		padding: 0;
+		margin: 10px auto;
+		font-family: 'WarhavenBold';
+	}
+
+	.infoLM h3:hover{
+		color: #41926E;
+		text-decoration: underline 1.5px;
+	}
+
+	.infoLM h5 a:hover{
+		color: #41926E;
+		text-decoration: underline 1.5px;
+	}
+
+	.infoLM p{
+		width: 250px;
+		height: 100px;
+		overflow: hidden;
+		font-size: 10pt;
+	}
+
+	.infoLM span.stock{
+		color: #FF0000;
+		font-size: 9pt;
+	}
+
+	.addLM{
+		padding-top: 20px;
+	}
+
+	.addLM button{
+		width: 100px;
+		height: 50px;
+		display: block;
+		border: 2px solid;
+		border-radius: 5px;
+		margin: 10px auto;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		color: #FFFFFF;
+	}
+
+	.addLM button.cart{
+		background-color: #41926E;
+		border-color: #41926E;
+	}
+
+	.addLM button.cart:hover{
+		background-color: #347558;
+		border-color: #347558;
+	}
+
+	.addLM button.buy{
+		background-color: #20B2AA;
+		border-color: #20B2AA;
+	}
+
+	.addLM button.buy:hover{
+		background-color: #1A8E88;
+		border-color: #1A8E88;
+	}
+
+	.addLM button.keep{
+		border-color: #41926E;
+		background-color: #FFFFFF;
+		color: #41926E;
+	}
+
+	.addLM button.keep:hover{
+		background-color: #E5F1EC;
+		color: #41926E;
+	}
+
+/* BookDetail.jsp */
+	.DetailOne{
+		width: 900px;
+		display: flex;
+		justify-content: center;
+	}
+
+	.DetailOne img{
+		width: 250px;
+		height: 375px;
+		border: 0.5px solid #7B8C85;
+		padding: 0;
+	}
+
+	.infoDO{
+		width: 400px;
+		margin: 10px 30px;
+	}
+
+	.infoDO h1, p a{
+		font-family: 'WarhavenBold';
+	}
+
+	.infoDO p a:hover{
+		color: #41926E;
+		text-decoration: underline 1.5px;
+	}
+
+	.infoDO table{
+		width: 380px;
+		border-top: 1px solid #41926E;
+		border-bottom: 1px solid #41926E;
+		margin: 20px 0;
+		text-align: left;
+	}
+
+	.infoDO tr{
+		height: 40px;
+	}
+
+	.infoDO td b{
+		margin-right: 5px;
+		font-family: 'WarhavenBold';
+		font-size: 15pt;
+	}
+
+	.addDO{
+		width: 200px;
+		height: 300px;
+		justify-content: center;
+		background-color: #F8FBFA;
+		padding-top: 20px;
+		margin: 10px auto;
+	}
+
+	.addDO p{
+		padding: 0;
+		margin: 10px auto;
+		text-align: center;
+	}
+
+	.addDO p.stock{
+		color: #FF0000;
+		font-size: 9pt;
+		font-weight: bold;
+	}
+
+	.addDO input{
+		width: 50px;
+		text-align: right;
+	}
+
+	.addDO button{
+		width: 150px;
+		height: 50px;
+		display: block;
+		border: 2px solid;
+		border-radius: 5px;
+		margin: 10px auto;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		color: #FFFFFF;
+	}
+
+	.addDO button.cart{
+		background-color: #41926E;
+		border-color: #41926E;
+	}
+
+	.addDO button.cart:hover{
+		background-color: #347558;
+		border-color: #347558;
+	}
+
+	.addDO button.buy{
+		background-color: #20B2AA;
+		border-color: #20B2AA;
+	}
+
+	.addDO button.buy:hover{
+		background-color: #1A8E88;
+		border-color: #1A8E88;
+	}
+
+	.addDO button.keep{
+		border-color: #41926E;
+		background-color: #FFFFFF;
+		color: #41926E;
+	}
+
+	.addDO button.keep:hover{
+		background-color: #E5F1EC;
+		color: #41926E;
+	}
+
+	.DetailTwo{
+		width: 900px;
+		display: flex;
+		justify-content: center;
+		padding: 0;
+	}
+
+	.DetailTwo article div{
+		width: 700px;
+		padding: 0;
+		margin: 50px auto;
+	}
+
+	.DetailTwo article ul{
+		width: 600px;
+		display: flex;
+		justify-content: left;
+		padding: 0;
+		margin: 0;
+		text-align: center;
+	}
+
+	.DetailTwo article li{
+		width: 150px;
+		height: 50px;
+		border: 2px solid #41926E;
+		border-radius: 5px 5px 0 0;
+		background-color: #41926E;
+		margin-right: 10px;
+		font-family: 'WarhavenBold';
+		color: #FFFFFF;
+		line-height: 50px;
+	}
+
+	.DetailTwo article li.On{
+		background-color: #FFFFFF;
+		color: #41926E;
+	}
+
+	.DetailTwo article a li:hover{
+		border-color: #20B2AA;
+		background-color: #20B2AA;
+	}
+
+	.DetailTwo article p{
+		width: 600px;
+		border: 2px solid #41926E;
+		padding: 10px;
+		margin-top: -1.5px;
+		font-size: 12pt;
+		text-align: justify;
+	}
+
+	.DetailTwo aside{
+		width: 200px;
+		display: block;
+		padding: 0;
+		margin: 30px auto;
+	}
+
+	.DetailTwo aside div{
+		width: 200px;
+		display: flex;
+		margin-bottom: 10px;
+	}
+
+	.DetailTwo aside img{
+		width: 50px;
+		height: 75px;
+		padding: 0;
+	}
+
+	.DetailTwo aside p{
+		margin: 5px;
+		font-size: 10px;
+	}
+
+	.DetailTwo aside p b{
+		font-family: 'WarhavenBold';
+	}
+
+/* MyPage.jsp */
+	.MyMain{
+		width: 900px;
+		justify-content: center;
+		padding: 0
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.btnMM{
+		width: 900px;
+		display: flex;
+		justify-content: center;
+		margin-bottom: 80px;
+		font-family: 'WarhavenBold';
+		font-size: 15pt;
+		text-align: center;
+	}
+
+	.btnMM li{
+		width: 420px;
+		height: 30px;
+		border-bottom: 2px solid;
+		margin: auto 50px;
+		cursor: pointer;
+	}
+
+	.btnMM li.On, li.On a{
+		border-color: #41926E;
+		color: #41926E;
+	}
+
+	.contMM{
+		display: none;
+		justify-content: center;
+		margin: 0 auto;
+	}
+
+	.contMM.On{
+		display: block;
+	}
+
+	.contMM h1{
+		font-family: 'WarhavenBold';
+	}
+
+	.tableMM-01 table{
+		border: 2px solid #41926E;
+		border-collapse: collapse;
+	}
+
+	.tableMM-01 th{
+		width: 200px;
+		height: 40px;
+		background-color: #41926E;
+		font-family: 'WarhavenBold';
+		color: #FFFFFF;
+	}
+	.tableMM-01 td{
+		width: 200px;
+		height: 50px;
+	}
+
+	.tableMM-02 tr{
+		width: 900px;
+		height: 50px;
+	}
+
+	.tableMM-02 th{
+		width: 300px;
+		font-family: 'WarhavenBold';
+		text-align: center;
+	}
+
+	.tableMM-02 td{
+		width: 400px;
+		border-bottom: 2px solid black;
+		text-align: left;
+	}
+
+	.btnModify{
+		margin: 30px auto;
+	}
+
+	.btnModify button{
+		width: 150px;
+		height: 40px;
+		border: 2px solid;
+		border-radius: 5px;
+		margin: auto 20px;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+	}
+
+	.btnModify button.Update{
+		border-color: #41926E;
+		background-color: #41926E;
+		color: #FFFFFF;
+	}
+
+	.btnModify button.Update:hover{
+		border-color: #20B2AA;
+		background-color: #20B2AA;
+	}
+
+	.btnModify button.Delete{
+		border-color: #FF8787;
+		background-color: #FFFFFF;
+		color: #FF8787;
+	}
+
+	.btnModify button.Delete:hover{
+		background-color: #FFD7D7;
+	}
+
+/* UpdateUser.jsp */
+	.UpdateMain{
+		width: 400px;
+		align-items: center;
+		border: solid 1px #41926E;
+		padding: 50px;
+		margin-bottom: 50px;
+	}
+
+	.UpdateMain h3{
+		margin-bottom: 3px;
+		font-family: 'WarhavenBold';
+	}
+
+	.UpdateMain p{
+		padding: 0;
+		margin-bottom: 0;
+	}
+
+	.UpdateMain button{
+		width: 333px;
+		height: 50px;
+		display: block;
+		border: 1px solid #41926E;
+		border-radius: 5px;
+		margin: 10px auto;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		font-size: 13pt;
+	}
+
+	.UpdateMain button[type="submit"]{
+		background-color: #41926E;
+		color: #FFFFFF;
+	}
+
+	.UpdateMain button[type="submit"]:hover{
+		border:#20B2AA;
+		background-color: #20B2AA;
+	}
+
+	.UpdateMain button[type="button"]{
+		background-color: #FFFFFF;
+		margin-bottom: 30px;
+		color: #41926E;
+	}
+
+	.UpdateMain button[type="button"]:hover{
+		background-color: #E5F1EC;
+		margin-bottom: 30px;
+		color: #41926E;
+	}
+
+	.contUM{
+		padding: 0;
+		margin: 30px auto;
+	}
+
+	.contUM div{
+		width: 400px;
+		padding: 0 5px;
+		margin: 20px auto;
+		border-bottom: 1px solid;
+	}
+
+	.contUM h4{
+		margin-bottom: 0;
+		font-family: 'DNFForgedBlade';
+	}
+
+	.contUM input{
+		font-family: 'DNFForgedBlade';
+		font-size: 11pt;
+	}
+
+	.contUM p{
+		padding-left: 7px;
+		margin-top: -10px;
+		color: #41926E;
+		font-size: 10pt;
+	}
+
+	.contUM-01 input{
+		width: 200px;
+		height: 50px;
+		border: none;
+		outline: none;
+	}
+
+	.contUM-01 h4 b{
+		color: #FF0000;
+		font-size: 10pt;
+	}
+
+	.contUM-02 select{
+		width: 60px;
+		height: 30px;
+		margin: 13px 10px 13px auto;
+		font-family: 'DNFForgedBlade';
+		text-align: center;
+	}
+
+	.contUM-02 input[type="text"]{
+		width: 60px;
+		height: 25px;
+		margin: auto 5px;
+		text-align: center;
+	}
+
+	.contUM-02 input[type="text"]:focus{
+		text-align: left;
+	}
+
+	.contUM-03 input[type="text"]{
+		width: 100px;
+		height: 50px;
+		border: none;
+		outline: none;
+	}
+
+	.contUM-04 input{
+		width: 230px;
+		padding: 5px 5px;
+		margin: 13px auto;
+		text-align: left;
+	}
+
+	.contUM-05{
+		display: block;
+		justify-content: left;
+	}
+
+	.contUM-05 div{
+		border: none;
+		padding: 0;
+	}
+
+/* DeleteUser.jsp */
+	.DeleteMain{
+		width: 400px;
+		justify-content: center;
+		border: solid 1px #41926E;
+		padding: 50px;
+		margin-bottom: 50px;
+	}
+
+	.DeleteMain h3, h4{
+		margin-bottom: 3px;
+		font-family: 'WarhavenBold';
+	}
+
+	.DeleteMain h4{
+		margin-top: 30px;
+		text-align: center;
+	}
+
+	.DeleteMain p{
+		padding: 0;
+		margin-bottom: 0;
+		color: #FF0000;
+		font-size: 9pt;
+		text-align: justify;
+	}
+
+	.DeleteMain button{
+		width: 333px;
+		height: 50px;
+		display: block;
+		border: 1px solid #41926E;
+		border-radius: 5px;
+		margin: 10px auto;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		font-size: 13pt;
+		text-align: center;
+	}
+
+	.DeleteMain button[type="submit"]{
+		background-color: #41926E;
+		color: #FFFFFF;
+	}
+
+	.DeleteMain button[type="submit"]:hover{
+		border-color: #FF8787;
+		background-color: #FF8787;
+	}
+
+	.DeleteMain button[type="button"]{
+		background-color: #FFFFFF;
+		margin-bottom: 30px;
+		color: #41926E;
+	}
+
+	.DeleteMain button[type="button"]:hover{
+		background-color: #E5F1EC;
+		color: #41926E;
+	}
+
+	.DeleteMain div{
+		width: 350px;
+		padding: 0 5px;
+		margin: 30px auto;
+		border-bottom: 1px solid;
+	}
+
+	.DeleteMain input{
+		width: 350px;
+		height: 50px;
+		border: none;
+		outline: none;
+		font-family: 'DNFForgedBlade';
+	}
+
+/* BookClub.jsp */
+	.navBookClub ul{
+		width: 800px;
+		display: flex;
+		justify-content: space-between;
+		padding: 0;
+	}
+	.navBookClub img{
+		width: 120px;
+		height:120px
+	}
+
+	.BookClubMain table{
+		width: 800px;
+		border: 0;
+		border-spacing: 0;
+		padding: 5;
+
+		background-color: pink;
+	}
