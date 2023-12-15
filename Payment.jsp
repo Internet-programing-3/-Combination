@@ -51,6 +51,10 @@
         .horizontal-line {
             border: solid 1px;
         }
+        
+        i{
+        	font-size: large; font-weight: bold; margin-right: 20px;
+        }
     </style>
 </head>
 <body style="width: 98vw; display: flex; flex-direction: column; margin: 0px; align-items: center;">
@@ -71,46 +75,51 @@
             </div>
         </main>
 
-<main>
+	<main>
         <div class="flex-container">
 
             <!-- 배송지 정보, 주문 상품, 결제 수단 테이블 -->
-            <div class="info-container">
-                <table class="flex-item">
-                    <!-- 배송지 정보 테이블 -->
-                    <tr>
-                        <th class="no-border">배송지 정보</th>
-                    </tr>
-                    <tr>
-                        <td class="no-border">수령인: 홍길동</td>
-                    </tr>
-                    <tr>
-                        <td class="no-border">주소: 서울시 강남구</td>
-                    </tr>
-                    <tr>
-                        <td>연락처: 010-1234-5678</td>
-                    </tr>
+            <div>
+	            <div style="width: 40vw; height: 30vh; border: solid 1px black; margin-bottom: 20px;">
+					<div style="border-bottom: solid 1px; padding: 10px;">배송지 정보</div>
+					<div style="height: 77%; display: flex; flex-direction: column; justify-content: space-around; padding: 10px;">
+						<div><i>주소</i> **도 **시 **동 **아파트 ***동 ****호</div>
+						<div><i>수령인</i> ***</div>
+						<div><i>연락처</i> 010-1234-5678</div>
+					</div>
+	            </div>
+	            
+	            <div style="width: 40vw;border: solid 1px black; margin-bottom: 20px;">
+					<div style="border-bottom: solid 1px; padding: 10px;">주문상품 : 총 n개</div>
+					<div style="display: flex; align-items: center; justify-content: space-around; padding: 10px; border-bottom: solid 1px;">
+                        <!--책 이미지 -->
+                        <img src="book_a.jpg" alt="Book A" style="width: 50px; height: 70px; margin-right: 10px;">
 
-                    <!-- 주문 상품 테이블 -->
-                    <tr>
-                        <th class="no-border">주문 상품</th>
-                    </tr>
-                    <tr>
-                        <td class="no-border">상품명: 추천해요 책</td>
-                    </tr>
-                    <tr>
-                        <td class="horizontal-line">가격: 30,000원</td>
-                    </tr>
-
-                    <!-- 다른 상품 정보들도 추가 -->
-                    <tr>
-                        <th class="no-border">결제 수단 선택</th>
-                    </tr>
-                    <tr>
-                        <td class="no-border">신용카드 계좌이체</td>
-                    </tr>
-                </table>
-            </div>
+                        <!-- 책 정보 -->
+                        <div>책 A 제목</div>
+                        <div>수량: 1</div>
+                        <div>가격: 30,000원</div>
+					</div>
+	            </div>
+	            
+	            <div style="width: 40vw;border: solid 1px black; margin-bottom: 20px;">
+	            	<div style="border-bottom: solid 1px; padding: 10px;">결제 수단</div>
+	            	<div style="display: flex; justify-content: space-around; padding: 30px;">
+	            		<div>
+	            			<input type="radio" name="payment">카드
+	            		</div>
+	            		<div>
+	            			<input type="radio" name="payment">계좌
+	            		</div>
+	            		<div>
+	            			<input type="radio" name="payment">카카오
+	            		</div>
+	            		<div>
+	            			<input type="radio" name="payment">네이버
+	            		</div>
+	            	</div>
+	            </div>
+	        </div>
 
             <!-- 결제 정보 창 -->
             <div class="payment-info-container">
@@ -137,12 +146,7 @@
             </div>
             
         </div>
-</main>
-
-
-        <footer style="display: flex; justify-content: space-around; margin-top: 5vh;">
-            <textarea style="width: 20vw; height: 10vh; resize: none; border: solid 1px; padding: 10px;"></textarea>
-        </footer>
+	</main>
 
     </div>
 </body>

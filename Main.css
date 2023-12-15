@@ -118,6 +118,11 @@
 		border: none;
 		padding: 0 10px 0 10px;
 		margin: 5px;
+		font-size: 12pt;
+	}
+
+	.searchMain input:focus{
+		outline: none;
 	}
 
 	.searchMain button{
@@ -716,6 +721,11 @@
 		margin: 10px auto;
 		font-family: 'WarhavenBold';
 	}
+	
+	.infoLM h5{
+		padding: 0;
+		margin-left: 0;
+	}
 
 	.infoLM h3:hover{
 		color: #41926E;
@@ -1311,22 +1321,731 @@
 	}
 
 /* BookClub.jsp */
-	.navBookClub ul{
+	.BookClubMain{
+		display: flex;
+		justify-content: space-around;
+		margin: 50px;
+	}
+
+	.asideBCM{
+		width: 150px;
+		height: 480px;
+		display: block;
+		justify-content: center;
+		border: 2px solid #FF8787;
+		position: sticky;
+		top: 80px;
+	}
+	.asideBCM table{
+		width: 130px;
+		display: block;
+		border: none;
+		border-spacing: 0;
+		margin: 10px;
+		font-size: 9pt;
+	}
+
+	.asideBCM th{
+		width: 70px;
+		font-family: 'WarhavenBold';
+		text-align: left;
+	}
+
+	.asideBCM td{
+		padding: 3px 10px;
+		text-align: right;
+	}
+
+	.asideBCM button{
+		width: 130px;
+		height: 30px;
+		display: block;
+		border: 1px solid #FF8787;
+		border-radius: 5px;
+		margin: 5px 10px;
+		font-family: 'WarhavenBold';
+		text-align: center;
+	}
+
+	.asideBCM button.Write{
+		background-color: #FF8787;
+		color: #FFFFFF;
+	}
+
+	.asideBCM button.Write:hover{
+		background-color: #FF6565;
+	}
+
+	.asideBCM button.Option{
+		background-color: #FFFFFF;
+		color: #FF8787;
+	}
+
+	.asideBCM button.Option:hover{
+		background-color: #FFEEEE;
+	}
+
+	.userBCM{
+		width: 100px;
+		display: flex;
+		margin: 10px;
+		justify-content: left;
+		overflow: hidden;
+	}
+
+	.userBCM img{
+		width: 50px;
+		height: 50px;
+		padding: 0;
+		margin: 0 3px;
+	}
+
+	.userBCM h5{
+		padding: 0;
+		margin: 5px 3px;
+		font-family: 'WarhavenBold';
+	}
+
+	.btnBCM{
+		width: 100px;
+		padding: 0;
+		margin: 10px;
+		text-align: left;
+	}
+
+	.btnBCM li{
+		width: 100px;
+		height: 20px;
+		margin: 10px 0;
+		line-height: 20px;
+	}
+
+	.btnBCM li a:hover{
+		color: #FF8787;
+	}
+
+	.btnBCM li.On a{
+		font-family: 'WarhavenBold';
+		color: #FF8787;
+		text-decoration: underline 1.5px;
+	}
+
+	.btnBCM h4{
+		width: 140px;
+		height: 35px;
+		background-color: #FF8787;
+		padding: 0 5px;
+		margin: 10px -10px;
+		font-family: 'WarhavenBold';
+		color: #FFFFFF;
+		line-height: 35px;
+	}
+
+	.contBCM{
 		width: 800px;
+		display: block;
+		justify-content: center;
+		margin: auto 10px;
+	}
+
+	.headerBCM{
+		width: 800px;
+		border: 1px solid #FF8787;
+		border-radius: 10px;
+		background-color: #FF8787;
+		font-size: 20pt;
+	}
+
+	.headerBCM h1, h6{
+		margin: 15px;
+		font-family: 'WarhavenBold';
+		color: #FFFFFF;
+	}
+
+	.contBCM-01{
+		margin-top: 30px;
+		font-family: 'WarhavenBold';
+		font-size: 15pt;
+	}
+
+	.contBCM-01 h1, h5{
+		margin: 10px;
+		padding: 0 10px;
+	}
+	
+	.contBCM-01 ul{
+		display: flex;
+		justify-content: right;
+		margin: 0;
+		font-size: 11pt;
+	}
+
+	.contBCM-01 li{
+		width: 70px;
+		height: 20px;
+		text-align: center;
+		line-height: 20px;
+	}
+
+	.contBCM-01 li a:hover{
+		text-decoration: underline 1.3px #FF8787;
+		color: #FF8787;
+	}
+
+	.contBCM-01 li.On a{
+		font-family: 'WarhavenBold';
+		color: #FF8787;
+	}
+
+	.contBCM-01 li.On a:hover{
+		text-decoration: none;
+	}
+
+	.contBCM-02{
+		width: 800px;
+		height: 600px;
+		display: block;
+		border: 2px solid #FF8787;
+		margin-top: 10px;
+		text-align: center;
+	}
+
+	.contBCM-02 table{
+		border-collapse: collapse;
+		margin: 0 auto;
+	}
+
+	.contBCM-02 th{
+		height: 40px;
+		border-bottom: 2px solid #FF8787;
+		font-family: 'WarhavenBold';
+		font-size: 13pt;
+		text-align: center;
+	}
+
+	.contBCM-02 td{
+		height: 50px;
+		border-bottom: 1px dotted #FF8787;
+		padding: 0;
+		line-height: 50px;
+	}
+
+	.contBCM-02 td.Num{
+		width: 60px;
+		text-align: center;
+	}
+
+	.contBCM-02 td.Title{
+		width: 300px;
+		overflow: hidden;
+		text-align: left;
+	}
+
+	.contBCM-02 td.Title a:hover{
+		color: #FF8787;
+	}
+
+	.contBCM-02 td.Writer{
+		width: 150px;
+		text-align: center;
+	}
+
+	.contBCM-02 td.Writer a:hover{
+		color: #FF8787;
+	}
+
+	.contBCM-02 td.Date{
+		width: 150px;
+		text-align: center;
+	}
+
+	.contBCM-02 td.View{
+		width: 80px;
+		text-align: center;
+	}
+
+	.contBCM-03{
+		width: 800;
+		margin: 10px auto;
+	}
+
+	.contBCM-03 div.btnWrite{
+		width: 100px;
+		display: flex;
+		justify-content: right;
+		background-color: #FF8787;
+		border: 1px solid #FF8787;
+		border-radius: 5px;
+		padding: 3px;
+		margin: auto 0 auto auto;
+	}
+
+	.contBCM-03 div.btnWrite:hover{
+		background-color: #FF6565;
+	}
+
+	.contBCM-03 div.btnWrite p{
+		font-family: 'WarhavenBold';
+		color: #FFFFFF;
+	}
+
+	.contBCM-03 div.btnWrite img{
+		width: 30px;
+		height: 30px;
+		padding: 0;
+		margin: 3px 10px;
+	}
+
+	.contBCM-03 div.Page{
+		width: 230px;
 		display: flex;
 		justify-content: space-between;
-		padding: 0;
-	}
-	.navBookClub img{
-		width: 120px;
-		height:120px
+		margin: 0 auto;
 	}
 
-	.BookClubMain table{
+	.contBCM-03 div.Page p{
+		margin: 10px;
+		font-family: 'WarhavenBold';
+		color: #FF8787;
+		text-align: center;
+	}
+
+	.contBCM-03 div.Page a p:hover{
+		color: #FF6565;
+	}
+
+/* BookClubDetail.jsp */
+	.DetailBCMain{
+		display: flex;
+		justify-content: space-around;
+		margin: 50px;
+	}
+
+	.contDBCM{
 		width: 800px;
-		border: 0;
-		border-spacing: 0;
-		padding: 5;
+		display: block;
+		justify-content: center;
+		margin: 0 10px;
+	}
 
-		background-color: pink;
+	.contDBCM-01{
+		width: 800px;
+		height: 50px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.contDBCM-01 a{
+		padding: 0;
+		font-family: 'WarhavenBold';
+		color: #FF8787;
+	}
+
+	.contDBCM-01 a h3{
+		padding: 0;
+		margin: 10px;
+		line-height: 30px;
+	}
+
+	.contDBCM-01 ul{
+		display: flex;
+	}
+
+	.contDBCM-01 ul li{
+		width: 50px;
+		text-align: center;
+	}
+
+	.contDBCM-01 ul li a:hover{
+		text-decoration: underline 1.5px #FF8787;
+	}
+
+	.contDBCM-02{
+		width: 800px;
+		border: 2px solid #FFCDCD;
+		margin: 10px auto;
+	}
+
+	.contDBCM-02 div.Header{
+		height: 100px;
+		border-bottom: 2px solid #FFDFDF;
+		margin: 10px;
+		font-size: 15pt;
+	}
+
+	.contDBCM-02 div.Header h1{
+		margin: 10px;
+		font-family: 'WarhavenBold';
+	}
+
+	.contDBCM-02 div.Header img{
+		width: 40px;
+		height: 40px;
+		display: inline-block;
+		padding: -5px 0;
+		margin: auto 5px auto 10px;
+	}
+
+	.contDBCM-02 div.Header span{
+		display: inline-block;
+		padding: 0;
+		text-align: top;
+	}
+
+	.contDBCM-02 div.Header p{
+		margin-top: 0;
+		padding: 0;
+		font-size: 10pt;
+	}
+
+	.contDBCM-02 div.Header p.Writer{
+		font-family: 'WarhavenBold';
+	}
+
+	.contDBCM-02 div.Header p.Writer a:hover{
+		color: #FF8787;
+		text-decoration: underline 1.3px solid #FF8787;
+	}
+
+	.contDBCM-02 div.Header p.Date{
+		font-size: 9pt;
+	}
+
+	.contDBCM-02 div.Content{
+		width: 770px;
+		margin: 10px auto;
+		font-size: 11pt;
+	}
+
+	.contDBCM-03{
+		width: 800px;
+		justify-content: left;
+		margin: 10px;
+	}
+
+	.contDBCM-03 ul{
+		display: flex;
+		border-bottom: 1px dotted #FFCDCD;
+		padding: 0;
+		margin: 20px auto;
+	}
+
+	.contDBCM-03 li{
+		width: 50px;
+		margin: 0;
+		margin-bottom: 10px;
+		font-family: 'WarhavenBold';
+		font-size: 10pt;
+		line-height: 30px;
+		text-align: center;
+	}
+
+	.contDBCM-03 img{
+		width: 30px;
+		height: 30px;
+	}
+
+	.contDBCM-03  li.Content{
+		width: 500px;
+		text-align: left;
+	}
+
+	.contDBCM-03  li.Content p{
+		margin-top: 0;
+		margin-left: 7px;
+		text-align: left;
+	}
+
+	.contDBCM-03 li.Content div{
+		margin: -15px 7px;
+		margin-bottom: 5px;
+		font-family: 'DNFForgedBlade';
+		text-align: justify;
+	}
+
+	.contDBCM-03 li.Content button{
+		width: 40px;
+		display: inline-block;
+		border: none;
+		background-color: #FFFFFF;
+		margin: auto -3px;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		font-size: 9pt;
+		color: #FF8787;
+	}
+
+	.contDBCM-03 li.Content button:hover{
+		text-decoration: underline 1.3px solid #FF8787;
+	}
+
+	.contDBCM-03 div.Comment{
+		width: 700px;
+		display: block;
+		justify-content: left;
+		border: 2px solid #FFCDCD;
+		border-radius: 5px;
+		padding: 10px;
+		margin: 10px auto;
+		font-family: 'WarhavenBold';
+	}
+
+	.contDBCM-03 div.Comment input{
+		margin: 10px auto;
+	}
+
+	.contDBCM-03 div.Comment input[type="text"]{
+		width: 700px;
+		height: 30px;
+		border: none;
+		overflow: auto;
+		font-family: 'DNFForgedBlade';
+	}
+	
+	.contDBCM-03 div.Comment input[type="text"]:focus{
+		outline: none;
+	}
+
+	.contDBCM-03 div.Comment input[type="button"]{
+		width: 70px;
+		height: 30px;
+		display: block;
+		border: 1px solid #FF8787;
+		border-radius: 3px;
+		background-color: #FF8787;
+		margin: 3px 5px 3px auto;
+		font-family: 'WarhavenBold';
+		color: #FFFFFF;
+	}
+
+	.contDBCM-03 div.Comment input[type="button"]:hover{
+		background-color: #FF6565;
+	}
+
+/*BookClubWrite.jsp*/
+	.writeBCMain{
+		width: 800px;
+		display: block;
+		justify-content: center;
+		margin: 50px auto;
+	}
+
+	.writeBCMain table{
+		margin: 0 auto;
+		text-align: left;
+	}
+
+	.writeBCMain tr th{
+		width: 100px;
+		font-family: 'WarhavenBold';
+		font-size: 15pt;
+		color: #FF8787;
+		text-align: left;
+		line-height: 50pt;
+	}
+
+	.writeBCMain td{
+		width: 500px;
+		border-bottom: 2px dotted #FF8787;
+		padding: 10px;
+		font-family: 'DNFForgedBlade';
+		font-size: 11pt;
+	}
+
+	.writeBCMain input[type="text"]{
+		margin: 5px;
+		width: 450px;
+		height: 30px;
+		border: none;
+		margin-bottom: 0;
+	}
+
+	.writeBCMain input[type="text"]:focus{
+		outline: none;
+	}
+
+	.writeBCMain textarea{
+		padding: 5px;
+		font-family: 'DNFForgedBlade';
+	}
+
+	.writeBCMain button{
+		width: 100px;
+		height: 30px;
+		display: block;
+		border: 1px solid #FF8787;
+		border-radius: 3px;
+		background-color: #FF8787;
+		margin-top: 10px;
+		margin-left: 380px;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		color: #FFFFFF;
+	}
+
+	.writeBCMain button:hover{
+		background-color: #FF6565;
+	}
+
+	.writeBCMain button.Back{
+		background-color: #FFFFFF;
+	}
+
+	.writeBCMain button.Back a{
+		color: #FF8787;
+	}
+
+	.writeBCMain button.Back:hover{
+		background-color: #FFEEEE;
+	}
+/*BookClubDelete*/
+	.deleteBCMain{
+		width: 400px;
+		justify-content: center;
+		border: solid 1px #FF8787;
+		padding: 50px;
+		margin-bottom: 50px;
+	}
+
+	.deleteBCMain h3, h4{
+		margin-bottom: 3px;
+		font-family: 'WarhavenBold';
+	}
+
+	.deleteBCMain h4{
+		margin-top: 30px;
+		text-align: center;
+	}
+
+	.deleteBCMain p{
+		padding: 0;
+		margin-bottom: 0;
+		color: #FF0000;
+		font-size: 9pt;
+		text-align: justify;
+	}
+
+	.deleteBCMain button{
+		width: 333px;
+		height: 50px;
+		display: block;
+		border: 1px solid #FF8787;
+		border-radius: 5px;
+		margin: 10px auto;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		font-size: 13pt;
+		text-align: center;
+	}
+
+	.deleteBCMain button[type="submit"]{
+		background-color: #FF8787;
+		color: #FFFFFF;
+	}
+
+	.deleteBCMain button[type="submit"]:hover{
+		border-color: #FF8787;
+		background-color: #FF8787;
+	}
+
+	.deleteBCMain button[type="button"]{
+		background-color: #FFFFFF;
+		margin-bottom: 30px;
+		color: #FF8787;
+	}
+
+	.deleteBCMain button[type="button"]:hover{
+		background-color: #FFEEEE;
+		color: #FF8787;
+	}
+
+	.deleteBCMain div{
+		width: 350px;
+		padding: 0 5px;
+		margin: 30px auto;
+		border-bottom: 1px solid;
+	}
+
+	.deleteBCMain input{
+		width: 350px;
+		height: 50px;
+		border: none;
+		outline: none;
+		font-family: 'DNFForgedBlade';
+	}
+
+/* BooKClubModify.jsp */
+	.modifyBCMain{
+		width: 800px;
+		display: block;
+		justify-content: center;
+	}
+
+	.modifyBCMain table{
+		margin: 0 auto;
+		text-align: left;
+	}
+
+	.modifyBCMain tr th{
+		width: 100px;
+		font-family: 'WarhavenBold';
+		font-size: 15pt;
+		color: #FF8787;
+		text-align: center;
+		line-height: 50pt;
+	}
+
+	.modifyBCMain td{
+		width: 500px;
+		border-bottom: 2px dotted #FF8787;
+		padding: 10px;
+		font-family: 'DNFForgedBlade';
+		font-size: 11pt;
+	}
+
+	.modifyBCMain input[type="text"]{
+		margin: 5px;
+		width: 450px;
+		height: 30px;
+		border: none;
+		margin-bottom: 0;
+	}
+
+	.modifyBCMain input[type="text"]:focus{
+		outline: none;
+	}
+
+	.modifyBCMain textarea{
+		padding: 5px;
+		font-family: 'DNFForgedBlade';
+	}
+
+	.modifyBCMain button{
+		width: 100px;
+		height: 30px;
+		display: block;
+		border: 1px solid #FF8787;
+		border-radius: 3px;
+		background-color: #FF8787;
+		margin-top: 10px;
+		margin-left: 380px;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		color: #FFFFFF;
+	}
+
+	.modifyBCMain button:hover{
+		background-color: #FF6565;
+	}
+
+	.modifyBCMain button.Back{
+		background-color: #FFFFFF;
+	}
+
+	.modifyBCMain button.Back a{
+		color: #FF8787;
+	}
+
+	.modifyBCMain button.Back:hover{
+		background-color: #FFEEEE;
 	}

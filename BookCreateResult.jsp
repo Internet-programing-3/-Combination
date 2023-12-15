@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=euc-kr" %>
-<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.*, java.io.*, java.util.UUID" %>
+<%@ page import="java.nio.file.Paths" %>
+
 <html>
 <head>
     <title>도서 등록 결과</title>
@@ -12,41 +14,61 @@
     String bookCtg = request.getParameter("bookCtg");
     String bookId = request.getParameter("bookId");
     String bookName = request.getParameter("bookName");
-    int price = Integer.parseInt(request.getParameter("price")); // String => int 변환
-    int bookStock = Integer.parseInt(request.getParameter("bookStock")); // String => int 변환
+    String priceParam = request.getParameter("price");
+    String bookStockParam = request.getParameter("bookStock");
+    int price = (priceParam != null && !priceParam.isEmpty()) ? Integer.parseInt(priceParam) : 0;
+    int bookStock = (bookStockParam != null && !bookStockParam.isEmpty()) ? Integer.parseInt(bookStockParam) : 0;
+
     String writer = request.getParameter("writer");
     String bookContent = request.getParameter("bookContent");
     String publisher = request.getParameter("publisher");
     String bookStatus = request.getParameter("bookStatus");
     String bookReview = request.getParameter("bookReview");
 
+    String uploadPath = getServletContext().getRealPath("") + File.separator + "uploads";
+    File uploadDir = new File(uploadPath);
+    if (!uploadDir.exists()) {
+        uploadDir.mkdir();
+    }
+
+    String fileName = "";
+    Part filePart = request.getPart("bookImgFile");
+    if (filePart != null && filePart.getSize() > 0) {
+        fileName = UUID.randomUUID().toString() + "_" + Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        String filePath = uploadPath + File.separator + fileName;
+        try (InputStream input = filePart.getInputStream(); OutputStream output = new FileOutputStream(filePath)) {
+            byte[] buffer = new byte[1024];
+            while (input.read(buffer) != -1) {
+                output.write(buffer);
+            }
+        }
+    }
+
     try {
-        String DB_URL = "jdbc:mysql://localhost:3306/internetproject"; // DB 접속할 명
-        String DB_ID = "multi"; // 접속할 아이디
-        String DB_PASSWORD = "abcd"; // 접속할 패스워드
+  
+    	String DB_URL = "jdbc:mysql://localhost:3306/internetproject?serverTimezone=UTC";
+        String DB_ID = "multi";
+        String DB_PASSWORD = "abcd";
 
-        Class.forName("org.gjt.mm.mysql.Driver"); // JDBC 드라이버 로딩
+        Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD);
-        // DB 에 접속
 
-        // SQL : 문 작성 테이블 필드명
-        String jsql = "INSERT INTO Book (bookCtg, bookId, bookName, price, bookStock, writer, bookContent, publisher, bookStatus, bookReview) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        // PreparedStatement (SQL ) 생성 문의 형틀을 정의함
+        // 수정된 SQL 문
+        String jsql = "INSERT INTO Book (bookCtg, bookId, bookName, price, bookStock, writer, bookContent, publisher, bookStatus, bookReview, bookImg) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = con.prepareStatement(jsql);
-        // SQL ? ( ) 위의 문에서 에 해당되는 곳에 다음의 값들을 하나씩 할당함 인수 전달
-        // setInt() 정수형의 경우에는 를 사용함
+
         pstmt.setString(1, bookCtg);
         pstmt.setString(2, bookId);
         pstmt.setString(3, bookName);
-        pstmt.setInt(4, price); // 정수값인 경우
-        pstmt.setInt(5, bookStock); // 정수값인 경우
+        pstmt.setInt(4, price);
+        pstmt.setInt(5, bookStock);
         pstmt.setString(6, writer);
         pstmt.setString(7, bookContent);
         pstmt.setString(8, publisher);
         pstmt.setString(9, bookStatus);
         pstmt.setString(10, bookReview);
-        pstmt.executeUpdate(); // SQL 문 실행
+        pstmt.setString(11, fileName);
+        pstmt.executeUpdate();
 %>
     <center>
         <font color="blue" size='6'><b>[ 등록된 도서 정보 ] </b></font><p>
@@ -61,6 +83,7 @@
             <tr><td width="100">출판사</td><td width="300"><%=publisher%></td></tr>
             <tr><td width="100">판매 상태</td><td width="300"><%=bookStatus%></td></tr>
             <tr><td width="100">도서 리뷰</td><td width="300"><%=bookReview%></td></tr>
+            <tr><td width="100">도서 사진</td><td width="300"><%=fileName%></td></tr>
         </table><p>
 <%
     } catch (Exception e) {

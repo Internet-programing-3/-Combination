@@ -1,224 +1,253 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*, java.text.*" %>
+<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.util.*"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>북클럽 게시판 상세보기</title>
+	<!-- 외부 CSS 적용 / 파일 경로 뒤에 ' ?v=1 ' 부분 지우지 마세요. 에러나요! -->
+	<!-- 단위 수정 잘못하면 UI랑 배열 깨집니다 -->
+	<link rel="stylesheet" type="text/css" href="Main.css?v=1">
+	<!-- jQuery 라이브러리 연결 -->
+	<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 </head>
-	<% String userid = (String)session.getAttribute("userId"); %>
+<body>
+	<%
+		// 인코딩
+		request.setCharacterEncoding("UTF-8");
+		// DB 연결
+		String DB_URL = "jdbc:mysql://localhost:3306/internetproject";
+		String DB_ID = "multi";
+		String DB_PASSWORD = "abcd";
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD);
+	%>
+	<!-- 자바스크립트 -->
+	<script type="text/javascript">
+		 $(document).ready(function(){
+			 //제이쿼리용
+			 $(".btnBCM li").click(function () {
+				var contNum = $(this).index();
+				$(this).addClass("On").siblings().removeClass("On");
+			});
+			 $(".contBCM li").click(function () {
+				var contNum = $(this).index();
+				$(this).addClass("On").siblings().removeClass("On");
+			});
 
-	<script language="javascript">
-      function in_check()
-	  {
-    	  let inp = document.input;
-	      let content = inp.content;
-	      let postId = inp.postId;
-	      let userId = inp.userId;
+			function in_check(){
+				let inp = document.input;
+				let content = inp.content;
+				let postId = inp.postId;
+				let userId = inp.userId;
 
-		  if (content.value == "") {
-			  alert("댓글 내용을 입력하세요!");
-			  return;
-		  }
-
-		  document.input.submit();
-		}
-      
-       function check(){
-    	   let del = document.del;
-    	   let postId = del.postId;
-    	   let commentId = del.commentId;
-    	   
-    	   document.del.submit();
-       }
-     </script>	
-
-<body style="width: 98vw; display: flex; flex-direction: column; margin: 0px; align-items: center;">
-    <div style="width: 70vw;">
-
-        <!-- 로고 부분 -->
-        <header style="display: flex; justify-content: center;">
-            <a href='Mainpage.jsp'><img src="logo.jpg" alt="로고"></a>
-        </header>
-
-        <!-- 첫번째 메뉴들 ( 오늘의 책, 검색창, 마이페이지, 로그인 ) -->
-        <main style="display: flex; justify-content: space-around; align-items: center;">
-            <div style="border: solid 2px; text-align: center; padding: 20px;">오늘의 책</div>
-            <div style="display: flex; border: solid 1px; width: 25vw; height: 6.3vh;">
-                <div style="border: solid 1px; padding: 10px; width: 20vw; height: 3.65vh;">
-                    <input type="text" style="width: 20vw; height: 4vh; border: none; outline: none;">
-                </div>
-                <button style="width: 10vw; background-color: white; border: solid 1px;">검색</button>
-            </div>
-            <div style="display: flex; flex-direction: column;">
-                <a href='MyPage.jsp' style="border: solid 2px; margin: 10px; background-color: white; padding: 5px; color:black; text-decoration: none;">
-                마이페이지</a>
-              	<%              	
-				if (userid == null) {
-				%>
-				    <a href='Login.jsp' style="border: solid 2px; margin: 10px; background-color: white; padding: 5px; color:black; text-decoration: none;">
-				    로그인</a>
-				<%
-				} else {
-				%>
-				    <a href='Logout.jsp' style="border: solid 2px; margin: 10px; background-color: white; padding: 5px; color:black; text-decoration: none;">
-				    로그아웃</a>
-				<%
+				if (content.value == ""){
+					alert("댓글 내용을 입력하세요!");
+					return;
 				}
-				%>
-                <button style="border: solid 2px; margin: 10px; background-color: white; padding: 5px;">장바구니</button>
-            </div>
-        </main>
+				document.input.submit();
+			}
+			function check(){
+				let del = document.del;
+				let postId = del.postId;
+				let commentId = del.commentId;
+				   
+				document.del.submit();
+			}
+		})
+	</script>
 
-        <!-- 두번째 메뉴들 ( 베스트셀러, 신간도서, 국내도서 등등 ) -->
-        <main style="display: flex; justify-content: space-around; margin-top: 5vh;">
-            <div style="display: flex; justify-content: center; align-items: center; border: solid 2px; border-radius: 100px; width: 7.5vw; height: 15vh;">베스트셀러</div>
-            <div style="display: flex; justify-content: center; align-items: center; border: solid 2px; border-radius: 100px; width: 7.5vw; height: 15vh;">신간도서</div>
-            <div style="display: flex; justify-content: center; align-items: center; border: solid 2px; border-radius: 100px; width: 7.5vw; height: 15vh;">국내도서</div>
-            <div style="display: flex; justify-content: center; align-items: center; border: solid 2px; border-radius: 100px; width: 7.5vw; height: 15vh;">해외도서</div>
-            <div style="display: flex; justify-content: center; align-items: center; border: solid 2px; border-radius: 100px; width: 7.5vw; height: 15vh;">이벤트</div>
-            <div style="display: flex; justify-content: center; align-items: center; border: solid 2px; border-radius: 100px; width: 7.5vw; height: 15vh;">
-            	<a href='BookClub.jsp?clubId=1' style="padding: 25px; color:black; text-decoration: none;">북클럽</a></div>
-        </main>
-        
-        <!-- 세번째 메뉴들 ( 북클럽 카테고리 ) -->
-        <main style="display: flex; justify-content: space-around; margin-top: 10vh;">
-        	<div style="display: flex; justify-content: center; align-items: center; border: solid 1px; width: 10vw; height: 8vh;">
-        		<a href='BookClub.jsp?clubId=1' style="padding: 20px; color:black; text-decoration: none;">추천해요 책</a>
-        	</div>
-        	<div style="display: flex; justify-content: center; align-items: center; border: solid 1px; width: 10vw; height: 8vh;">
-        		<a href='BookClub.jsp?clubId=2' style="padding: 20px; color:black; text-decoration: none;">추천해줘요 책</a>
-        	</div>
-	        <div style="display: flex; justify-content: center; align-items: center; border: solid 1px; width: 10vw; height: 8vh;">
-	        	<a href='BookClub.jsp?clubId=3' style="padding: 20px; color:black; text-decoration: none;">얘기해요 책</a>
-	        </div>
-        </main>
-      
-       <%
-	       String DB_URL="jdbc:mysql://localhost:3306/internetproject";  
-	       String DB_ID="multi";  
-	       String DB_PASSWORD="abcd"; 
-	 	 
-		   Class.forName("com.mysql.jdbc.Driver");  
-	 	   Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD); 
-	
-		   String postId = request.getParameter("postId");              
-		   String  jsql = "select * from clubpost where postId = ?";
-	       PreparedStatement pstmt = con.prepareStatement(jsql);
-	       pstmt.setInt(1, Integer.parseInt(postId));
-	       ResultSet rs = pstmt.executeQuery();
-		
-	       String clubId = "";
-	       String title = "";
-	       String content = "";
-	       String created_at = "";
-	       String userId = "";
-	       int hits = 0;
-	       
-	       if(!rs.wasNull()) {
-	           rs.next();
-	           clubId = rs.getString("clubId");
-	           title = rs.getString("title").trim();
-	           content = rs.getString("content").trim();
-	           created_at = rs.getString("created_at").trim();
-	           userId = rs.getString("userId").trim();
-	           hits = rs.getInt("hits");
-	           hits ++;
-	       }
-   		%> 
-   		
-   		<!-- 네번째 메뉴들 ( 목록 , 수정 , 삭제 ) -->
-   		<%	if(userId.equals(userid)){%>
-   		    <main style="margin-top: 5vh; display: flex; justify-content: flex-end;">
-   				<a href="BookClub.jsp?clubId=<%=clubId%>" style="margin-right: 2vw; color:black; text-decoration: none;">목록</a>
-   	            <a href="BookClubModify.jsp?postId=<%=postId%>" style="margin-right: 2vw; color:black; text-decoration: none;">수정</a>
-   	            <a href="BookClubDelete.jsp?postId=<%=postId%>" style="color:black; text-decoration: none;">삭제</a>
-   	        </main>
-   		<%	}else{ %>
-   			<main style="margin-top: 5vh; display: flex; justify-content: flex-end;">
-   				<a href="BookClub.jsp?clubId=<%=clubId%>" style="margin-right: 2vw; color:black; text-decoration: none;">목록</a>
-   			</main>
-   		<% } %>
-        
-        <!-- 다섯번째 메뉴들 ( 북클럽 상세보기 ) -->
-        <main style="display: flex; flex-direction: column; justify-content: space-around; 
-        margin-top: 2vh; border-top: solid 1px; border-bottom: solid 1px; padding: 20px;">
-        	<div style="display: flex; justify-content: space-between;">
-        		<div><%= title %></div>
-        		<div><%= hits %></div>
-        	</div>
-        	<div style="margin-top: 3vh;"><%= userId %></div>
-        	<div style="margin-top: 3vh;"><%= created_at %></div>
-        	<div style="padding: 10px; margin-top: 3vh; border: solid 1px; height: 70vh; margin-bottom: 2vh;"><%= content %></div>
-        	댓글 목록
-        </main>
-        
-        <%
-        	String jsql2 = "select * from clubcomment order by commentId";
-        	PreparedStatement pstmt2 = con.prepareStatement(jsql2);
-        	ResultSet rs2 = pstmt2.executeQuery();
-        	while (rs2.next()) 
- 		   {
-        		  String commentId = rs2.getString("commentId");
- 	              String comment_content = rs2.getString("content");
- 				  String comment_userId = rs2.getString("userId");
- 	              String comment_created_at = rs2.getString("created_at");
-        %>
-        
-        <!-- 네번째 메뉴들 ( 상세보기 댓글 ) -->
-        <main style="display: flex; justify-content: space-between; border-bottom: solid 1px; padding: 15px;">
-        	<div style="display: flex;">
-        		<div><%= commentId %></div>
-        		<div style="margin-left: 1vw;"><%= comment_userId %></div>
-        		<div style="margin-left: 5vw;"><%= comment_content %></div>
-        	</div>
-        	<div style="display: flex;">
-	        	<div><%= comment_created_at %></div>
-	        	<% if(comment_userId.equals(userid)){ %>
-        		<div style="margin-left: 2vw;">
-        			<form method="post" action="CommentDelete.jsp" name="del">
-        				<input type = "hidden" name="commentId" value="<%= commentId %>">
-        				<input type = "hidden" name="postId" value="<%= postId %>">
-	        			<input type = "button" style="border: solid 1px; cursor: pointer;" value="삭제" OnClick="check()">
-	        		</form>
-	        	</div>
-	        	<% } %>
-        	</div>
-        </main>
-        <%	} %>
-        <div style="margin-top: 3vh;">
-	        <form method="post" action="BookClubDetailOk.jsp" name="input"
-	        style="display: flex; justify-content: space-between; margin-top: 1vh;">
-	        	<input type = "hidden" name="postId" value="<%= postId %>">
-	        	<input type = "hidden" name="userId" value="<%= userid %>">
-	        	<input type = "text" style="width: 60vw; height: 3vh;" name="content">
-	        	<input type = "button" style="background-color: white; border: solid 1px; cursor: pointer;" value="댓글 달기" OnClick="in_check()">
-	        </form>
+	<!-- header (로고) 북클럽 Ver. -->
+	<header>
+		<p><a href="Mainpage.jsp">&lt; 청년책방 페이지로 돌아가기</a></p>
+		<a href="BookClub.jsp?clubId=1">
+			<img src="images/LogoBC.jpg" style="width: 300px; height: 150px;" alt="북클럽 로고">
+		</a>
+	</header>
+
+	<!-- nav1 ( 오늘의 책, 검색창, 마이페이지, 로그인 ) 북클럽 Ver. -->
+	<nav class="navMainOne">
+		<!--오늘의 책 -->
+		<div class="todayMain"><a href="#">
+			<%
+				int today = 0;
+				Random random = new Random();
+				today = random.nextInt(8) + 1;
+
+				String todayBook = "SELECT bookId, bookName, writer, bookImg FROM Book WHERE bookId = ?";
+				PreparedStatement pstmtToday = con.prepareStatement(todayBook);
+				pstmtToday.setInt(1, today);
+				ResultSet rsToday = pstmtToday.executeQuery();
+				rsToday.next();
+				int todaykId = rsToday.getInt("bookId");
+				String todayName = rsToday.getString("bookName");
+				String todayWriter = rsToday.getString("writer");
+				String todayBookImg = rsToday.getString("bookImg");
+			%>
+			<span>
+				<img src="<%=todayBookImg%>.jpg" title="<%=todayName%>(<%=todayWriter%>)" alt="<%=todayName%>">
+			</span>
+			<span>
+				<h3><%=todayName%></h3>
+				<p><%=todayWriter%></p>
+			</span>
+			<%
+				rsToday.close();
+				pstmtToday.close();
+			%>
+		</a></div>
+		<!-- 검색바 -->
+		<div class="searchMain" style="border-color: #FF8787;">
+			<img src="images/LogoIconBC.png" alt="로고아이콘">
+			<input type="text">
+			<button type="button" style="border-color: #FF8787; background-color: #FF8787;" alt="검색 버튼">검색</button>
+		</div>
+		<!-- 마이페이지, 장바구니, 로그인/로그아웃 버튼 -->
+		<div>
+			<!-- 로그인 -->
+			<%
+				if (session.getAttribute("userId") == null) {
+			%>
+			<a href="Login.jsp">
+				<img src="images/mypageBC.png" style="width: 50px; height: 50px; margin-right: 3px;" title="마이페이지" alt="마이페이지">
+			</a>
+			<a href="Login.jsp">
+				<img src="images/edit.png" style="width: 50px; height: 53px; margin: 0 10px;" title="글쓰기" alt="글쓰기">
+			</a>
+			<a href="Login.jsp">
+				<img src="images/logInBC.png" style="width: 50px; height: 50px;" title="로그인" alt="회원가입/로그인">
+			</a>
+			<!-- 로그아웃 -->
+			<%
+				} else {
+			%>
+			<a href="MyPage.jsp">
+				<img src="images/mypageBC.png" style="width: 50px; height: 50px;" title="마이페이지" alt="마이페이지">
+			</a>
+			<a href="BookClubWrite.jsp">
+				<img src="images/edit.png" style="width: 50px; height: 53px; margin: 0 10px;" title="글쓰기" alt="글쓰기">
+			</a>
+			<a href="Logout.jsp">
+				<img src="images/logOutBC.png" style="width: 50px; height: 50px;" title="로그아웃" alt="로그아웃">
+			</a>
+			<%
+				}
+			%>
         </div>
+	</nav>
+   		
+	<main class="DetailBCMain">
+		<aside class="asideBCM">	
+			<!--- 유저 프로필 -->
+			<div class="userBCM">
+				<img src="images/mypageBC.png" title="북클럽 프로필" alt="북클럽 프로필">
+				<h5>닉네임</h5>
+			</div>
+			<!-- 내가 쓴 글, 댓글 관리 -->
+			<table>
+				<tr>
+					<th>내가 작성한 글</th>
+					<td>00개</td>
+				</tr>
+				<tr>
+					<th>내가 단 댓글</th>
+					<td>00개</td>
+				</tr>
+			</table>
+			<!-- 북클럽 설정, 글 작성 버튼 -->
+			<a href="BookClubWrite.jsp"><button class="Write">글쓰기</button></a>
+			<a href="javascript:void(0);"><button class="Option">북클럽 설정</button></a>
+			<!-- 북클럽 내비게이션 -->
+			<ul class="btnBCM">
+				<h4>북클럽 소식</h4>
+				<li><a href="javacript:void(0);">공지</a></li>
+				<li><a href="javacript:void(0);">이벤트</a></li>
+				<li><a href="javacript:void(0);">이달의 도서</a></li>
+				<h4>북클럽 게시판</h4>
+				<li class="On"><a href="javacript:void(0);">추천해요 책</a></li>
+				<li><a href="javacript:void(0);">추천해줘요 책</a></li>
+				<li><a href="javacript:void(0);">독서 토론</a></li>
+			</ul>
+		</aside>
+		<section class="contDBCM">
+			<!-- 목록으로 돌아가기, 글 수정, 삭제 -->
+			<article class="contDBCM-01">
+				<a href="BookClub.jsp"><h3>&lt; 목록</h3></a>
+				<ul>
+					<li><a href="BookClubModify.jsp">수정</a></li>
+					<li><a href="BookClubDelete.jsp">삭제</a></li>
+				</ul>
+			</article>
+			<!-- 게시글 -->
+			<article class="contDBCM-02">
+				<!-- 제목, 작성자, 조회수 -->
+				<div class="Header">
+					<h1>위대하지않은 게츠비</h1>
+					<img src="images/mypageBC.png">
+					<span>
+						<p class="Writer"><a href="javacript:void(0);">작성자</a></p>
+						<p class="Date">2023.10.23 | 조회수 10</p>
+					</span>
+				</div>
+				<!-- 내용 -->
+				<div class="Content">
+					내용 상세
+				</div>
+			</article>
+			<!-- 댓글 -->
+			<article class="contDBCM-03">
+				<h4>댓글 ( 0 )</h4>
+				<!-- 댓글 목록-->
+				<ul>
+					<li><img src="images/mypageBC.png"></li>
+					<li class="Content">
+						<p>작성자</p>
+						<div>댓글 내용</div>
+						<button>수정</button>
+						<button OnClick="check()">삭제</button>
+					</li>
+				</ul>
+				<!--댓글 작성 -->
+				<div class="Comment">
+					<form method="post" action="BookClubDetailOk.jsp" name="input">
+						<input type="hidden" name="postId" value="<%//=postId%>">
+						<input type = "hidden" name="userId" value="<%//= userid %>">작성자
+						<input type="text" name="content" placeholder="댓글을 남겨보세요">
+						<input type="button" OnClick="in_check()" value="댓글 등록">
+						</form>
+				</div>
+			</article>
+		</section>
+	</main>
 
-		<%   
-		    rs.close();
-			pstmt.close();
-	
-	        String jsql3 = "update clubpost set hits = ? where postId = ?";
-	        PreparedStatement up_hits_Pstmt = con.prepareStatement(jsql3);
-	        up_hits_Pstmt.setInt(1, hits);
-	        up_hits_Pstmt.setInt(2, Integer.parseInt(postId));
-	        up_hits_Pstmt.executeUpdate();
-	        
-			up_hits_Pstmt.close();  
-			con.close();
-  		%> 
+	<%
+		con.close();
+	%>
 
-        <!-- 이용약관, 고객센터, 1:1문의, FAQ -->
-        <footer style="display: flex; justify-content: space-around; margin-top: 5vh;">
-            <button style="display: flex; justify-content: center; align-items: center; background-color: white; border: solid 1px; width: 5vw;">이용약관</button>
-            <button style="display: flex; justify-content: center; align-items: center; background-color: white; border: solid 1px; width: 5vw;">고객센터</button>
-            <button style="display: flex; justify-content: center; align-items: center; background-color: white; border: solid 1px; width: 5vw;">1:1문의</button>
-            <button style="display: flex; justify-content: center; align-items: center; background-color: white; border: solid 1px; width: 5vw;">FAQ</button>
-        </footer>
-    </div>
+	<!-- footer 북클럽 Ver. -->
+	<footer>
+		<div class="notices" style="border-color: #FF8787;">
+			<ul>
+				<li><h4>공지사항</h4></li>
+				<li><a href="javascript:void(0);">개인정보 처리방침 변경안내</a></li>
+				<li><a href="javascript:void(0);"><h4>더보기+</h4></a></li>
+				<li><h4>이벤트</h4></li>
+				<li><a href="javascript:void(0);">11월 북클럽 독후감대회 우승자 발표</a></li>
+				<li><a href="javascript:void(0);"><h4>더보기+</h4></a></li>
+			</ul>
+		</div>
+		<div class="footerMain" style="margin-top: 10px;">
+			<img src="images/LogoBC.jpg" style="height: 150px;" alt="북클럽 로고">
+			<div style="margin-top: 35px;">
+				<p>회사소개 | 이용약관 | 개인정보처리방침 | 청소년보호정책 | 대량주문안내 | 협력사여러분 | 채용정보 | 광고소개</p>
+				<p>
+					대표이사 : 서병덕 | 남서울대학교 멀티미디어학과 | 사업자등록번호 : 181-001-2002</br>
+					대표전화 : 1588-0000 (발신자 부담전화) | FAX : 0000-112-505 (지역번호 공통) | 인터넷프로그래밍2 : 제 2023호
+				</p>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

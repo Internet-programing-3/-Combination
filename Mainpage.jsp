@@ -160,6 +160,7 @@
 			<table>
 				<tr>
 				<%
+				
 					String RecommendBook = "SELECT bookId, bookName, price, writer, bookImg FROM Book LIMIT 8";
 					int RB = 1;
 					PreparedStatement pstmtRB = con.prepareStatement(RecommendBook);

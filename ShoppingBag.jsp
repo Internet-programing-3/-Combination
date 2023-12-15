@@ -26,55 +26,27 @@
 
         <main style="display: flex; justify-content: space-around; margin-top: 5vh;">
             <!-- 장바구니 내역 창 -->
-            <div style="border: solid 1px; height: 80vh; text-align: center; width: 60%;">
+            <div style="border: solid 1px; text-align: center; width: 60%;">
                 <div style="border-bottom: solid 1px; width: 100%; height: 8vh; display: flex; align-items: center; justify-content: space-between;">
                     <div>
                         <input type="checkbox" id="selectAll"> 전체 선택
                     </div>
                     <div>
-                        <span style="cursor: pointer; color: blue; text-decoration: underline;">구매 목록 삭제</span>
+                        <span style="margin-right: 10px; cursor: pointer; color: blue; text-decoration: underline;">목록 삭제</span>
                     </div>
                 </div>
-                <div style="width: 100%; padding: 5px;">
+                <div style="width: 100%;">
                     <!-- 책 A -->
                     
-                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: solid 1px; width: 100%; height: 10vh;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: solid 1px; width: 97%; height: 10vh; padding: 10px;">
                         <!--책 이미지 -->
-                        <input type="checkbox" id="selectB"> 
+                        <input type="checkbox">
                         <img src="book_a.jpg" alt="Book A" style="width: 50px; height: 70px; margin-right: 10px;">
 
                         <!-- 책 정보 -->
-                        <div style="flex-grow: 1; text-align: left;">
-                            <div>책 A 제목</div>
-                            <div>수량: 1</div>
-                            <div>가격: 30,000원</div>
-                        </div>
-                    </div>
-                    <!-- 책 B -->
-                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: solid 1px; width: 100%; height: 10vh;">
-                        <!-- 책 이미지 -->
-                        <input type="checkbox" id="selectB"> 
-                        <img src="book_b.jpg" alt="Book B" style="width: 50px; height: 70px; margin-right: 10px;">
-
-                        <!-- 책 정보 -->
-                        <div style="flex-grow: 1; text-align: left;">
-                            <div>책 B 제목</div>
-                            <div>수량: 2</div>
-                            <div>가격: 40,000원</div>
-                        </div>
-                    </div>
-                    <!-- 책 C -->
-                    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; height: 10vh;">
-                        <!-- 책 이미지 -->
-                        <input type="checkbox" id="selectB"> 
-                        <img src="book_c.jpg" alt="Book C" style="width: 50px; height: 70px; margin-right: 10px;">
-
-                        <!-- 책 정보 -->
-                        <div style="flex-grow: 1; text-align: left;">
-                            <div>책 C 제목</div>
-                            <div>수량: 1</div>
-                            <div>가격: 30,000원</div>
-                        </div>
+                        <div>책 A 제목</div>
+                        <div>수량: 1</div>
+                        <div>가격: 30,000원</div>
                     </div>
                 </div>
             </div>
@@ -95,10 +67,6 @@
                 </div>
             </div>
         </main>
-
-        <footer style="display: flex; justify-content: space-around; margin-top: 5vh;">
-            <div style="width: 20vw; height: 10vh; resize: none; border: solid 1px; padding: 10px;"></div>
-        </footer>
 
     </div>
 </body>
