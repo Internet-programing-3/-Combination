@@ -1898,6 +1898,7 @@
 	.writeBCMain button.Back:hover{
 		background-color: #FFEEEE;
 	}
+
 /*BookClubDelete*/
 	.deleteBCMain{
 		width: 400px;
@@ -2048,4 +2049,208 @@
 
 	.modifyBCMain button.Back:hover{
 		background-color: #FFEEEE;
+	}
+
+/* ShoppingBag.jsp */
+	.ShopMain{
+		display: flex;
+		justify-content: center;
+		margin: 50px auto;
+	}
+
+	.ShopMain section{
+		width: 600px;
+		margin: 0 20px;
+	}
+
+	.shopList{
+		margin-bottom: 20px;
+	}
+
+	.shopList table{
+		width: 600px;
+		border: 2px solid #41926E;
+		border-collapse: collapse;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.shopHeader{
+		height: 50px;
+		border-bottom: 2px solid #41926E;
+		font-family: 'WarhavenBold';
+	}
+
+	.shopHeader a button{
+		border: 1.8px solid #41926E;
+		border-radius: 3px;
+		background-color: #FFFFFF;
+		margin: auto 20px;
+		cursor: pointer;
+		font-family: 'WarhavenBold';
+		text-align: center;
+	}
+
+	.shopHeader a button:hover{
+		background-color: #E5F1EC;
+	}
+
+	.shopCont{
+		height: 100px;
+		border-bottom: 1.5px solid #E5F1EC;;
+		text-align: top;
+	}
+
+	.shopCont img{
+		width: 50px;
+		height: 75px;
+		padding: 0;
+		margin: 0 auto;
+	}
+
+	.shopAside{
+		width: 250px;
+		margin: 0 20px;
+	}
+
+	.shopAside table{
+		width: 250px;
+		border: 2px solid #41926E;
+		border-collapse: collapse;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.shopAside table th{
+		padding: 15px;
+		font-family: 'WarhavenBold';
+		text-align: left;
+	}
+
+	.shopAside table td{
+		height: 30px;
+		padding: 10px;
+		font-weight: bold;
+		text-align: right;
+	}
+
+	.shopAside a button{
+		width: 250px;
+		height: 50px;
+		display: block;
+		border: 1px solid #41926E;
+		border-radius: 5px;
+		background-color: #41926E;
+		margin: 10px auto;
+		font-family: 'WarhavenBold';
+		color: #FFFFFF;
+	}
+
+	.shopAside a button:hover{
+		border-color: #20B2AA;
+		background-color: #20B2AA;
+	}
+
+	.shopEnd{
+		background-color: #E5F1EC;
+		font-family: 'WarhavenBold';
+		font-size: 13pt;
+		color: #41926E;
+	}
+
+/* Payment.jsp */
+	.PayMain{
+		display: flex;
+		justify-content: center;
+		margin: 50px auto;
+	}
+	.cartHeader{
+		height: 50px;
+		border-bottom: 2px solid #41926E;
+		font-family: 'WarhavenBold';
+		text-align: left;
+	}
+
+	.cartHeader th{
+		padding: 15px;
+	}
+
+	.cartCont{
+		height: 30px;
+		text-align: left;
+	}
+
+	.cartCont th{
+		padding: 15px;
+		font-family: 'WarhavenBold';
+	}
+
+	.shopAside input{
+		margin: 10px;
+	}
+
+	.shopAside span{
+		text-align: justify;
+		line-height: 10px;
+	}
+
+/* orderOk.jsp */
+	.orderMain{
+		width: 900px;
+		justify-content: center;
+		margin: 30px auto;
+	}
+
+	.orderHeader{
+		width: 350px;
+		height: 60px;
+		border-radius: 20px;
+		margin: 10px auto;
+		margin-bottom: 30px;
+		background-color: #41926E;
+		font-family: 'WarhavenBold';
+		font-size: 15pt;
+		color: #FFFFFF;
+		text-align: center;
+		line-height: 60px;
+	}
+
+	.orderEnd{
+		width: 600px;
+		height: 80px;
+		display: flex;
+		justify-content: space-between;
+		border: 2px solid #41926E;
+		background-color: #E5F1EC;
+		margin: 10px auto;
+	}
+
+	.orderEnd p.EndOne{
+		margin-left: 20px;
+		font-family: 'WarhavenBold';
+		font-size: 15pt;
+		line-height: 60px;
+	}
+
+	.orderEnd p.EndTwo{
+		margin-right: 30px;
+		font-weight: bold;
+		font-size: 15pt;
+		line-height: 60px;
+	}
+
+	.pageMove{
+		width: 600px;
+		display: flex;
+		justify-content: space-between;
+		margin: 10px auto;
+		font-family: 'WarhavenBold';
+	}
+
+	.pageMove a{
+		color: #41926E;
+	}
+
+	.pageMove a:hover{
+		color: #20B2AA;
 	}

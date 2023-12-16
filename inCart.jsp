@@ -11,14 +11,14 @@
 </head>
 <body>
 <%
-    String myid = (String)session.getAttribute("sid"); 
+    String myid = (String)session.getAttribute("userId"); 
     if (myid == null) {
 %>
     <center>
         <br><br><br>
         <font style="font-size:10pt;font-family: '맑은 고딕'">
             상품 주문을 위해서는 로그인이 필요합니다 ! <br><br> 
-            <a href="login.jsp" ><img src="./images/login.gif" border=0></a>
+            <a href="Login.jsp" ><img src="images/logIn.png" border=0></a>
         </font>
     </center>
 <%
@@ -31,67 +31,62 @@
             Class.forName("org.gjt.mm.mysql.Driver"); 
             Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD); 
 
-            String ctNo = session.getId();
-            String bookId = request.getParameter("bookId");
-            int ctQty = Integer.parseInt(request.getParameter("quantity"));
+            if (session.getAttribute("userId") != null) {
+                // 로그인한 사용자일 경우
+                int userId = Integer.parseInt(myid);
 
-            // Check if the user has an existing cart
-            String cartCheckQuery = "SELECT * FROM Cart WHERE userId = ?";
-            PreparedStatement cartCheckPstmt = con.prepareStatement(cartCheckQuery);
-            cartCheckPstmt.setString(1, myid);
-            ResultSet cartCheckRs = cartCheckPstmt.executeQuery();
+                // 기존 세션에 저장된 cartId 확인
+                String cartIdAttribute = (String) session.getAttribute("cartId");
+                String cartId = (cartIdAttribute != null) ? cartIdAttribute : null;
 
-            int cartId;
+                String cartIdQuery = "SELECT cartId FROM Cart WHERE userId = ?";
+                try (PreparedStatement pstmtCartId = con.prepareStatement(cartIdQuery)) {
+                    pstmtCartId.setInt(1, userId);
+                    ResultSet rsCartId = pstmtCartId.executeQuery();
 
-            if (cartCheckRs.next()) {
-                cartId = cartCheckRs.getInt("cartId");
-            } else {
-                // If the user doesn't have a cart, create one
-                String createCartQuery = "INSERT INTO Cart (userId) VALUES (?)";
-                PreparedStatement createCartPstmt = con.prepareStatement(createCartQuery, Statement.RETURN_GENERATED_KEYS);
-                createCartPstmt.setString(1, myid);
-                createCartPstmt.executeUpdate();
+                    if (rsCartId.next()) {
+                        cartId = rsCartId.getString("cartId");
+                        session.setAttribute("cartId", cartId);
+                    }
+                }
 
-                ResultSet generatedKeys = createCartPstmt.getGeneratedKeys();
-                if (generatedKeys.next()) {
-                    cartId = generatedKeys.getInt(1);
-                } else {
-                    // Handle error
-                    throw new SQLException("Creating cart failed, no ID obtained.");
+                String ctNo = session.getId();
+                String bookId = request.getParameter("bookId");
+                int ctQty = Integer.parseInt(request.getParameter("quantity"));
+
+                String cartCheckQuery = "SELECT * FROM Cart WHERE cartId = ? AND bookId=? ";
+                try (PreparedStatement cartCheckPstmt = con.prepareStatement(cartCheckQuery)) {
+                    cartCheckPstmt.setString(1, ctNo);
+                    cartCheckPstmt.setString(2, bookId);
+                    ResultSet cartCheckRs = cartCheckPstmt.executeQuery();
+
+                    if (cartCheckRs.next()) {
+                        // 이미 존재하는 경우: 상품 수량 갱신
+                        int sum = cartCheckRs.getInt("ctQty") + ctQty;
+                        String updateSql = "UPDATE cart SET ctQty=? WHERE cartId=? AND bookId=?";
+                        try (PreparedStatement pstmtUpdate = con.prepareStatement(updateSql)) {
+                            pstmtUpdate.setInt(1, sum);
+                            pstmtUpdate.setString(2, ctNo);
+                            pstmtUpdate.setString(3, bookId);
+                            pstmtUpdate.executeUpdate();
+                        }
+                    } else {
+                        // 존재하지 않는 경우: 새로운 상품 레코드 추가
+                        String insertSql = "INSERT INTO cart (cartId, bookId, ctQty) VALUES (?, ?, ?)";
+                        try (PreparedStatement pstmtInsert = con.prepareStatement(insertSql)) {
+                            pstmtInsert.setString(1, ctNo);
+                            pstmtInsert.setString(2, bookId);
+                            pstmtInsert.setInt(3, ctQty);
+                            pstmtInsert.executeUpdate();
+                        }
+                    }
                 }
             }
-
-            // Check if the item is already in the cart
-            String itemCheckQuery = "SELECT * FROM CartItem WHERE cartId = ? AND bookId = ?";
-            PreparedStatement itemCheckPstmt = con.prepareStatement(itemCheckQuery);
-            itemCheckPstmt.setInt(1, cartId);
-            itemCheckPstmt.setString(2, bookId);
-            ResultSet itemCheckRs = itemCheckPstmt.executeQuery();
-
-            if (itemCheckRs.next()) {
-                // If the item is already in the cart, update the quantity
-                int existingQty = itemCheckRs.getInt("ctQty");
-                int newQty = existingQty + ctQty;
-
-                String updateItemQuery = "UPDATE CartItem SET ctQty = ? WHERE cartId = ? AND bookId = ?";
-                PreparedStatement updateItemPstmt = con.prepareStatement(updateItemQuery);
-                updateItemPstmt.setInt(1, newQty);
-                updateItemPstmt.setInt(2, cartId);
-                updateItemPstmt.setString(3, bookId);
-                updateItemPstmt.executeUpdate();
-            } else {
-                // If the item is not in the cart, add it
-                String addItemQuery = "INSERT INTO CartItem (cartId, bookId, ctQty) VALUES (?, ?, ?)";
-                PreparedStatement addItemPstmt = con.prepareStatement(addItemQuery);
-                addItemPstmt.setInt(1, cartId);
-                addItemPstmt.setString(2, bookId);
-                addItemPstmt.setInt(3, ctQty);
-                addItemPstmt.executeUpdate();
-            }
+          
+            response.sendRedirect("showCart.jsp");
         } catch(Exception e) {
             out.println(e);
         }
-        response.sendRedirect("showCart.jsp");
     }
 %>
 </body>

@@ -410,12 +410,9 @@
     }
 			rsBP.close();
 			pstmtBP.close();
+			con.close();
 		%>
 	</main>
-
-	<%
-		con.close();
-	%>
 
 	<!-- footer -->
 	<footer>

@@ -23,32 +23,51 @@
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     String created_at = dateFormat.format(new Date());
    
-    String jsql = "select MAX(postId) from clubpost";
-    PreparedStatement pstmt = con.prepareStatement(jsql);
-    ResultSet rs = pstmt.executeQuery();
+    int clubIdInt = (clubId != null && !"null".equals(clubId)) ? Integer.parseInt(clubId) : 0;
 
-    int no;
-    if (rs == null) {  
-        no = 1;
-    }  else {      
-        rs.next();
-        no = rs.getInt(1) + 1;
-    } 
-    
-    rs.close();    
+    // clubId가 유효하고 club 테이블에 존재하는지 확인
+    boolean isValidClubId = false;
+    String checkClubIdSQL = "SELECT COUNT(*) FROM club WHERE clubId = ?";
+    try (PreparedStatement checkClubIdStmt = con.prepareStatement(checkClubIdSQL)) {
+        checkClubIdStmt.setInt(1, clubIdInt);
+        try (ResultSet checkClubIdResult = checkClubIdStmt.executeQuery()) {
+            if (checkClubIdResult.next() && checkClubIdResult.getInt(1) > 0) {
+                isValidClubId = true;
+            }
+        }
+    }
 
-    String jsql2 = "insert into clubpost (postId, title, content, userId, created_at, clubId) values (?, ?, ?, ?, ?, ?)";
-    PreparedStatement pstmt2 = con.prepareStatement(jsql2);
-    pstmt2.setInt(1, no);
-    pstmt2.setString(2, title);
-    pstmt2.setString(3, content);
-    pstmt2.setString(4, userId);
-    pstmt2.setString(5, created_at);
-    pstmt2.setString(6, clubId);
-      
-    pstmt2.executeUpdate();
-   
-    response.sendRedirect("BookClub.jsp?clubId=" + clubId);
+    if (isValidClubId) {
+        String jsql = "select MAX(postId) from clubpost";
+        PreparedStatement pstmt = con.prepareStatement(jsql);
+        ResultSet rs = pstmt.executeQuery();
+
+        int no;
+        if (rs == null) {  
+            no = 1;
+        }  else {      
+            rs.next();
+            no = rs.getInt(1) + 1;
+        } 
+        
+        rs.close();    
+
+        String jsql2 = "insert into clubpost (postId, title, content, userId, created_at, clubId) values (?, ?, ?, ?, ?, ?)";
+        PreparedStatement pstmt2 = con.prepareStatement(jsql2);
+        pstmt2.setInt(1, no);
+        pstmt2.setString(2, title);
+        pstmt2.setString(3, content);
+        pstmt2.setString(4, userId);
+        pstmt2.setString(5, created_at);
+        pstmt2.setInt(6, clubIdInt); // clubIdInt를 사용하여 설정
+          
+        pstmt2.executeUpdate();
+       
+        response.sendRedirect("BookClub.jsp?clubId=" + clubId);
+    } else {
+        // 유효하지 않은 clubId에 대한 처리 (예: 에러 메시지 출력)
+        out.println("유효하지 않은 clubId입니다.");
+    }
 %>
   </body>
 </html>

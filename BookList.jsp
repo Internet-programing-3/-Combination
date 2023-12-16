@@ -176,15 +176,15 @@
 				<p>고가격순</p>
 			</article>
 			<%
-				while (rsLL.next()) {
-					int bookId = rsLL.getInt("bookId");
-					String bookName = rsLL.getString("bookName");
-					int price = rsLL.getInt("price");
-					int bookStock = rsLL.getInt("bookStock");
-					String writer = rsLL.getString("writer");
-					String bookContent = rsLL.getString("bookContent");
-					String publisher = rsLL.getString("publisher");
-					String bookImg = rsLL.getString("bookImg");
+			 while (rsLL.next()) {
+                 int bookId = rsLL.getInt("bookId");
+                 String bookName = rsLL.getString("bookName");
+                 int price = rsLL.getInt("price");
+                 int bookStock = rsLL.getInt("bookStock");
+                 String writer = rsLL.getString("writer");
+                 String bookContent = rsLL.getString("bookContent");
+                 String publisher = rsLL.getString("publisher");
+                 String bookImg = rsLL.getString("bookImg");
 			%>
 			<article class="contLM">
 				<a href="BookDetail.jsp?bookId=<%=bookId%>">
@@ -202,9 +202,9 @@
 					<p><%=bookContent%></p>
 				</div>
 				<div class="addLM">
-					<a href="#"><button class="cart">장바구니 담기</button></a>
+					<a href="inCart.jsp?bookId=<%=bookId%>"><button class="cart">장바구니 담기</button></a>
 					<a href="#"><button class="buy">바로 구매</button></a>
-					<a href="#"><button class="keep">내 서재 보관</button></a>
+				
 				</div>
 			</article>
 			<%
