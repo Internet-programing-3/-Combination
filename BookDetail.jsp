@@ -20,7 +20,7 @@
 		String DB_URL = "jdbc:mysql://localhost:3306/internetproject";
 		String DB_ID = "multi";
 		String DB_PASSWORD = "abcd";
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("org.gjt.mm.mysql.Driver"); 
 		Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD);
 
 		String bookId = request.getParameter("bookId");

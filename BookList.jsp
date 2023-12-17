@@ -21,7 +21,7 @@
 		String DB_URL = "jdbc:mysql://localhost:3306/internetproject";
 		String DB_ID = "multi";
 		String DB_PASSWORD = "abcd";
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("org.gjt.mm.mysql.Driver"); 
 		Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD);
 
 		String bookCtg = request.getParameter("bookCtg");
@@ -116,7 +116,7 @@
 			<a href="MyPage.jsp">
 				<img src="images/mypage.png" style="width: 50px; height: 50px;" title="마이페이지" alt="마이페이지">
 			</a>
-			<a href="#">
+			<a href="showCart.jsp">
 				<img src="images/cart.png" style="width: 50px; height: 50px; margin: 0 10px;" title="장바구니" alt="장바구니">
 			</a>
 			<a href="Logout.jsp">
@@ -201,8 +201,16 @@
 					</h4>
 					<p><%=bookContent%></p>
 				</div>
-				<div class="addLM">
-					<a href="inCart.jsp?bookId=<%=bookId%>"><button class="cart">장바구니 담기</button></a>
+				<form>
+            <label for="qty_<%=bookId%>">수량:</label>
+            <input type="number" id="qty_<%=bookId%>" name="quantity" min="1" max="<%=bookStock%>">
+        </form>
+
+        <div class="addLM">
+            <a href="inCart.jsp" onClick="inCart('<%=bookId%>', $('#qty_<%=bookId%>').val())">
+                <button class="cart">장바구니 담기</button>
+            </a>
+
 					<a href="#"><button class="buy">바로 구매</button></a>
 				
 				</div>
@@ -218,7 +226,6 @@
 	<%
 		con.close();
 	%>
-
 	<!-- footer -->
 	<footer>
 		<div class="notices">
@@ -244,3 +251,24 @@
 	</footer>
 </body>
 </html>
+
+
+	<script>
+		function inCart(bookId, ctQty) {
+		    // AJAX 요청
+		    $.ajax({
+		        type: 'POST',
+		        url: 'inCart.jsp',
+		        data: { bookId: bookId, ctQty: ctQty },
+		        success: function(response) {
+		            // 요청이 성공한 경우 처리
+		            alert('장바구니에 담겼습니다.');
+		        },
+		        error: function(error) {
+		            // 요청이 실패한 경우 처리
+		            alert('오류가 발생했습니다.');
+		        }
+		    });
+		}
+
+	</script>

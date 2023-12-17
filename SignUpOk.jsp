@@ -28,7 +28,7 @@ try {
      String DB_ID="multi";  
      String DB_PASSWORD="abcd"; 
  	 
-     Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("org.gjt.mm.mysql.Driver"); 
  	 Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD);
 
 	 String jsql = "INSERT INTO User (userId, password, name, phone, email, birth, gender) VALUES (?,?,?,?,?,?,?)";	

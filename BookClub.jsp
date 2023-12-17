@@ -21,7 +21,7 @@
 		String DB_URL = "jdbc:mysql://localhost:3306/internetproject";
 		String DB_ID = "multi";
 		String DB_PASSWORD = "abcd";
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("org.gjt.mm.mysql.Driver"); 
 		Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD);
 
 		String group_index;
@@ -184,7 +184,7 @@
 				<img src="images/edit.png" style="width: 50px; height: 53px; margin: 0 10px;" title="글쓰기" alt="글쓰기">
 			</a>
 			<a href="Logout.jsp">
-				<img src="images/logOutBC.png" style="width: 50px; height: 50px;" title="로그아웃" alt="로그아웃">
+				<img src="images/logoutBC.png" style="width: 50px; height: 50px;" title="로그아웃" alt="로그아웃">
 			</a>
 			
 				
@@ -235,7 +235,7 @@
 			<!-- 게시판 제목, 정렬 -->
 			<article class="contBCM-01">
 				<h1>전체글보기</h1>
-				<h5>총 1000개의 글</h5>
+			
 				<ul>
 					<li class="On"><a href="javascript:void(0)">최신순</a></li>
 					<li><a href="javascript:void(0)">오래된순</a></li>

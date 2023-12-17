@@ -27,7 +27,7 @@ if (userId == null) {
         String DB_ID = "multi";
         String DB_PASSWORD = "abcd";
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
+		Class.forName("org.gjt.mm.mysql.Driver"); 
         con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD);
 
         String cartIdQuery = "SELECT cartId FROM Cart WHERE userId = ?";

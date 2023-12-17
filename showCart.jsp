@@ -17,7 +17,7 @@
 		String DB_URL = "jdbc:mysql://localhost:3306/internetproject";
 		String DB_ID = "multi";
 		String DB_PASSWORD = "abcd";
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("org.gjt.mm.mysql.Driver"); 
 		Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD);
 	%>
 
@@ -82,7 +82,7 @@
 			<a href="MyPage.jsp">
 				<img src="images/mypage.png" style="width: 50px; height: 50px;" title="마이페이지" alt="마이페이지">
 			</a>
-			<a href="#">
+			<a href="showCart">
 				<img src="images/cart.png" style="width: 50px; height: 50px; margin: 0 10px;" title="장바구니" alt="장바구니">
 			</a>
 			<a href="Logout.jsp">
@@ -97,12 +97,11 @@
 	<main class="ShopMain">
 		<%
 		try {
-			Integer cartIdAttribute = (Integer) session.getAttribute("cartId");
-			int cartId = (cartIdAttribute != null) ? cartIdAttribute.intValue() : -1;
+			String ctNo = session.getId(); // ctNo 세션 번호를 장바구니 번호로서 이용하기 위해 에 저장
 
-			String jsql = "SELECT * FROM cart WHERE cartId = ?";
+			String jsql = "select * from cart where ctNo = ?";
 			PreparedStatement pstmt = con.prepareStatement(jsql);
-			pstmt.setInt(1, cartId);
+			pstmt.setString(1, ctNo);
 			ResultSet rs = pstmt.executeQuery();
 
 			if (!rs.next()) {
@@ -117,79 +116,85 @@
 		<%
 			} else {
 		%>
-				<form action="order.jsp" method="post">
-					<article class="shopList">
-						<table border=1 style="font-size:10pt;font-family: '맑은 고딕'">
-							<tr>
-								<td bgcolor="#002C57" width=120 height="30" align="center">
-									<font size="2" color="#ECFAE4"><strong>상품번호</strong></font>
-								</td>
-								<td bgcolor="#002C57" width=120 height="30" align="center">
-									<font size="2" color="#ECFAE4"><strong>상품명</strong></font>
-								</td>
-								<td bgcolor="#002C57" width=120 height="30" align="center">
-									<font size="2" color="#ECFAE4"><strong>상품단가 원(₩)</strong></font>
-								</td>
-								<td bgcolor="#002C57" width=120 height="30" align="center">
-									<font size="2" color="#ECFAE4"><strong>주문수량 개(개)</strong></font>
-								</td>
-								<td bgcolor="#002C57" width=120 height="30" align="center">
-									<font size="2" color="#ECFAE4"><strong>주문액 원(₩)</strong></font>
-								</td>
-								<td bgcolor="#002C57" width=120 height="30" align="center">
-									<font size="2" color="red"><b>[ ] 상품삭제 </b></font>
-								</td>
-							</tr>
-							<%
-							String jsql2 = "SELECT bookId, ctQty FROM cart WHERE cartId = ?";
-							PreparedStatement pstmt2 = con.prepareStatement(jsql2);
-							pstmt2.setInt(1, cartId);
-							ResultSet rs2 = pstmt2.executeQuery();
-							int total = 0;
-							while (rs2.next()) {
-								int bookId = rs2.getInt("bookId");
-								int quantity = rs2.getInt("ctQty");
-								String jsql3 = "SELECT bookName, price FROM book WHERE bookId = ?";
-								PreparedStatement pstmt3 = con.prepareStatement(jsql3);
-								pstmt3.setInt(1, bookId);
+		<article class="shopList">
+    <table>
+        <tr class="shopHeader">
+            <th><input type="checkbox" id="selectAll" checked></th>
+            <th colspan="2" align="left">전체 선택</th>
+            <th colspan="2" align="right">
+                <a href="javacript:void(0);"><button>선택 삭제</button></a>
+            </th>
+        </tr>
+        <!-- 상품 목록 -->
+             <%
+            // 기존 코드와 함께 사용할 변수 선언
+            int totalAmount = 0;
+            
+            String jsql2 = "select cart.bookId, ctQty, bookName, price, bookImg " +
+                           "from cart " +
+                           "join Book on cart.bookId = Book.bookId " +
+                           "where ctNo = ?";
+            PreparedStatement pstmt2 = con.prepareStatement(jsql2);
+            pstmt2.setString(1, ctNo);
+            ResultSet rs2 = pstmt2.executeQuery();
+            while (rs2.next()) {
+                String bookId = rs2.getString("bookId"); // cart 테이블로부터 상품번호 추출
+                int ctQty = rs2.getInt("ctQty"); // cart 테이블로부터 주문수량 추출
+                String bookName = rs2.getString("bookName");
+                int price = rs2.getInt("price");
+                String bookImg = rs2.getString("bookImg");
+                int amount = price * ctQty;
+                totalAmount += amount;
+        %>
+                <tr class="shopCont">
+                    <td><input type="checkbox" checked></td>
+                    <a href="javascript:void(0);">
+                        <td><img src="<%= bookImg %>.jpg"></td>
+                        <td align="left"><%= bookName %></td>
+                        <td><%= ctQty %>권</td>
+                        <td><%= amount %>원</td>
+                    </a>
+                </tr>
+        <%
+            }
+            rs2.close();
+            pstmt2.close();
+        %>
+    </table>
+</article>
 
-								ResultSet rs3 = pstmt3.executeQuery();
-								rs3.next();
-								String bookName = rs3.getString("bookName");
-								int price = rs3.getInt("price");
-								int amount = price * quantity;
-								total = total + amount;
-							%>
-								<tr>
-									<td bgcolor="#eeeede" height="30" align="center"><font size="2"><%=bookId%></font></td>
-									<td bgcolor="#eeeede" height="30" align="center"><font size="2"><%=bookName%></font></td>
-									<td bgcolor="#eeeede" height="30" align="center" align=right><font size="2"><%=price%></font></td>
-									<td bgcolor="#eeeede" height="30" align="center" align=right><font size="2"><%=quantity%></font></td>
-									<td bgcolor="#eeeede" height="30" align="right"><font size="2"><%=amount%> 원</font></td>
-									<td bgcolor="#eeeede" height="30" align="center">
-										<input type="checkbox" name="deleteItems" value="<%=bookId%>">
-									</td>
-								</tr>
+<!-- 결제정보 -->
+<aside class="shopAside">
+    <table>
+        <tr>
+            <th>총 상품 금액</th>
+            <td><%= totalAmount %>원</td>
+        </tr>
+        <tr>
+            <th>할인 금액</th>
+            <td>- 0원</td>
+        </tr>
+        <tr class="shopEnd">
+            <th>합계</th>
+            <td><%= totalAmount %>원</td>
+        </tr>
+    </table>
+    <!-- 구매 버튼 -->
+    <a href="Payment.jsp">
+        <button>구매하기</button>
+    </a>
+</aside>
+
+								
+			
 							<%
 							}
 							%>
-							<tr>
-								<td colspan=4 align=center><font size="2" color="red"><b>전체 주문총액</b></font></td>
-								<td bgcolor="#eeeede" height="30" align=right>
-									<font size="2" color="red"><b><%=total%> 원</b></font>
-								</td>
-								<td align=center>
-									<font size=2 color=green>( 선택물품 총합 ) </font>
-								</td>
-							</tr>
-						</table>
-						<br><br>
-						<input type="submit" value="주문하기">
-						<a href="deleteAllCart.jsp"><font size=2>장바구니 비우기</font></a>
-					</article>
-				</form>
+					
+					
+				
 		<%
-			}
+			
 		} catch (Exception e) {
 			out.println(e);
 		}
@@ -224,3 +229,5 @@
 	</footer>
 </body>
 </html>
+
+			

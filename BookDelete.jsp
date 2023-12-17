@@ -12,7 +12,7 @@ try {
     String DB_ID = "multi"; // 접속할 아이디
     String DB_PASSWORD = "abcd"; // 접속할 패스워드
 
-    Class.forName("org.gjt.mm.mysql.Driver"); // JDBC 드라이버 로딩
+	Class.forName("org.gjt.mm.mysql.Driver"); 
     Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD);
     String key = request.getParameter("bookId");
     String jsql = "SELECT * FROM BOOK WHERE bookId = ?";
