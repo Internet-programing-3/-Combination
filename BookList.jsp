@@ -143,9 +143,6 @@
 			<li><a href="BookList.jsp?bookCtg=해외도서">
 				<img src="images/menuButton04.png" alt="해외도서">
 			</a></li>
-			<li><a href="#">
-				<img src="images/menuButton05.png" alt="이벤트">
-			</a></li>
 			<li><a href="BookClub.jsp?clubId=1">
 				<img src="images/menuButton06.png" alt="북클럽">
 			</a></li>

@@ -151,9 +151,6 @@
 			<li><a href="BookList.jsp?bookCtg=해외도서">
 				<img src="images/menuButton04.png" alt="해외도서">
 			</a></li>
-			<li><a href="#">
-				<img src="images/menuButton05.png" alt="이벤트">
-			</a></li>
 			<li><a href="BookClub.jsp?clubId=1">
 				<img src="images/menuButton06.png" alt="북클럽">
 			</a></li>
@@ -191,9 +188,8 @@
 			<div class="addDO">
 				<p>주문수량 : <input type="number" name="#" value="1"> 권</p>
 				<%if(bookStock <= 10){ out.print("<p class='stock'>(남은 재고: " + bookStock + "권)</p>"); }%>
-				<a href="#"><button class="cart">장바구니 담기</button></a>
+				<a href="inCart.jsp"><button class="cart">장바구니 담기</button></a>
 				<a href="#"><button class="buy">바로 구매</button></a>
-				<a href="#"><button class="keep">내 서재 보관</button></a>		
 			</div>
 		</section>
 		<section class="DetailTwo">

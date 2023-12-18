@@ -101,7 +101,7 @@
 			<a href="MyPage.jsp">
 				<img src="images/mypage.png" style="width: 50px; height: 50px;" title="마이페이지" alt="마이페이지">
 			</a>
-			<a href="#">
+			<a href="showCart.jsp">
 				<img src="images/cart.png" style="width: 50px; height: 50px; margin: 0 10px;" title="장바구니" alt="장바구니">
 			</a>
 			<a href="Logout.jsp">
@@ -127,9 +127,6 @@
 			</a></li>
 			<li><a href="BookList.jsp?bookCtg=해외도서">
 				<img src="images/menuButton04.png" alt="해외도서">
-			</a></li>
-			<li><a href="#">
-				<img src="images/menuButton05.png" alt="이벤트">
 			</a></li>
 			<li><a href="BookClub.jsp?clubId=1">
 				<img src="images/menuButton06.png" alt="북클럽">

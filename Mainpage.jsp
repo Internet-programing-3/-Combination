@@ -110,7 +110,7 @@
 			<a href="MyPage.jsp">
 				<img src="images/mypage.png" style="width: 50px; height: 50px;" title="마이페이지" alt="마이페이지">
 			</a>
-			<a href="#">
+			<a href="showCart.jsp">
 				<img src="images/cart.png" style="width: 50px; height: 50px; margin: 0 10px;" title="장바구니" alt="장바구니">
 			</a>
 			<a href="Logout.jsp">
@@ -137,10 +137,7 @@
 			<li><a href="BookList.jsp?bookCtg=해외도서">
 				<img src="images/menuButton04.png" alt="해외도서">
 			</a></li>
-			<li><a href="#">
-				<img src="images/menuButton05.png" alt="이벤트">
-			</a></li>
-			<li><a href="BookClub.jsp?clubId=1">
+			<li><a href="BookClub.jsp">
 				<img src="images/menuButton06.png" alt="북클럽">
 			</a></li>
 		</ul>
@@ -155,7 +152,7 @@
 			<li><a href="javascript:void(0);">스테디셀러</a></li>
 			<li><a href="javascript:void(0);">코믹</a></li>
 		</ul>
-		<!-- tab1 추천 도서 -->
+		<!-- tab1 추천 도서 -->		
 		<div class="contMO On">
 			<table>
 				<tr>
@@ -340,28 +337,6 @@
 					pstmtMB.close();
 				%>
 			</table>
-		<h2>이벤트 도서</h2>
-			<table class="event">
-				<tr>
-				<%
-					String EventBook = "SELECT bookId, bookName, price, writer, bookImg FROM Book LIMIT 5";
-					PreparedStatement pstmtEB = con.prepareStatement(EventBook);
-					ResultSet rsEB = pstmtEB.executeQuery(); 
-					while(rsEB.next()){ 
-						int bookId = rsEB.getInt("bookId"); 
-						String  bookName = rsEB.getString("bookName"); 
-						String writer = rsEB.getString("writer");
-						String bookImg = rsEB.getString("bookImg");
-				%>
-					<td><a href="BookDetail.jsp?bookId=<%=bookId%>">
-						<img src="<%=bookImg%>.jpg" title="<%=bookName%>(<%=writer%>)" alt="<%=bookName%>">
-					</a></td>
-				<%
-					}
-					rsEB.close();
-					pstmtEB.close();
-				%>
-			</table>
 	</main>
 
 	<!-- main3 (북클럽 Pick) -->
@@ -391,6 +366,7 @@
 			<a href="#"><button>
 				추천 도서 전체보기
 			</button></a>
+			
 		</div>
 		<img src="<%=bookImg%>.jpg" title="<%=bookName%>(<%=writer%>)" alt="<%=bookName%>">
 		<div class="contMTh-02">

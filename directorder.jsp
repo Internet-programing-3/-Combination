@@ -47,31 +47,10 @@ if (userId == null) {
         int total = 0; // 전체 주문 총액
 %>
 <!-- 상품 주문서 -->
-<br><br>
-<font color="blue" size='6'><b>[ 상품 주문서 ]  </b></font><p>
+
 
 <!-- 주문 상품 목록 -->
-<table border=1 style="font-size:10pt;font-family:'맑은 고딕'">
-    <tr>
-        <td bgcolor="#002C57" width=120 height="30" align="center">
-            <font size="2" color="#ECFAE4"><strong>상품번호</strong></font>
-        </td>
-        <td bgcolor="#002C57" width=120 height="30" align="center">
-            <font size="2" color="#ECFAE4"><strong>상품명</strong></font>
-        </td>
-        <td bgcolor="#002C57" width=120 height="30" align="center">
-            <font size="2" color="#ECFAE4"><strong>상품단가 원(￦)</strong></font>
-        </td>
-        <td bgcolor="#002C57" width=120 height="30" align="center">
-            <font size="2" color="#ECFAE4"><strong>주문수량 개(개)</strong></font>
-        </td>
-        <td bgcolor="#002C57" width=120 height="30" align="center">
-            <font size="2" color="#ECFAE4"><strong>주문액 원(￦)</strong></font>
-        </td>
-        <td bgcolor="#002C57" width=114 height="30" align="center">
-            <font size="2" color="red"><b>비 고</b></font>
-        </td>
-    </tr>
+
 <%
         while (cartItemResult.next()) {
             int bookId = cartItemResult.getInt("bookId");
@@ -82,25 +61,6 @@ if (userId == null) {
             total += amount;
 %>
     <tr>
-        <td bgcolor="#eeeede" height="30" align="center">
-            <font size="2"><%= bookId %></font>
-        </td>
-        <td bgcolor="#eeeede" height="30" align="center">
-            <font size="2"><%= bookName %></font>
-        </td>
-        <td bgcolor="#eeeede" height="30" align="center" align="right">
-            <font size="2"><%= price %></font>
-        </td>
-        <td bgcolor="#eeeede" height="30" align="center" align="right">
-            <font size="2"><%= quantity %></font>
-        </td>
-        <td bgcolor="#eeeede" height="30" align="right">
-            <font size="2"><%= amount %> 원</font>
-        </td>
-        <td bgcolor="#eeeede" height="30" align="center">
-            <font size="2">즉시 구매</font>
-        </td>
-    </tr>
 <%
         }
 %>

@@ -93,7 +93,7 @@
             <a href="MyPage.jsp">
                 <img src="images/mypage.png" style="width: 50px; height: 50px;" title="마이페이지" alt="마이페이지">
             </a>
-            <a href="#">
+            <a href="inCart.jsp">
                 <img src="images/cart.png" style="width: 50px; height: 50px; margin: 0 10px;" title="장바구니" alt="장바구니">
             </a>
             <a href="Logout.jsp">
@@ -187,7 +187,6 @@
                         <th colspan="4">주문 상품 : <%=ctQty %> 개</th>
                     </tr>
                     <tr class="shopCont">
-                        <a href="javascript:void(0);">
                             <td><img src="<%= bookImg %>.jpg"></td>
                             <td align="left"><%= prdName %></td>
                             <td><%= ctQty %>권</td>
@@ -238,9 +237,7 @@
             <input type="checkbox" required>
             <span>상품, 가격, 할인 정보, 유의 사항 등을 확인하였으며 구매에 동의합니다.</span>
             <!-- 결제 버튼 -->
-            <a href="OrderOk.jsp">
-                <button>결제하기</button>
-            </a>
+				<a href="order.jsp"><button>결제하기</button></a>
         </aside>
         <%
         } finally {
