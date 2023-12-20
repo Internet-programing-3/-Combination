@@ -81,7 +81,7 @@
             </div>
 			<button type="submit" title="회원가입" alt="회원가입 버튼">회원가입</button>
 			<button type="reset" title="입력정보 초기화" alt="입력정보 초기화 버튼">입력한 정보 초기화</button>
-			<a href="/Login.jsp"><h5>로그인 화면으로 돌아가기</h5></a>
+			<a href="Login.jsp"><h5>로그인 화면으로 돌아가기</h5></a>
 		</form>
     </main>
 

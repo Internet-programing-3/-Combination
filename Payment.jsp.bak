@@ -133,7 +133,15 @@
 					
 
                     
-   
+    
+String ordRcvAddress = request.getParameter("ordRcvAddress");
+String ordReceiver = request.getParameter("ordReceiver");
+String ordRcvPhone = request.getParameter("ordRcvPhone");
+
+// 세션에 값 저장
+session.setAttribute("ordRcvAddress", ordRcvAddress);
+session.setAttribute("ordReceiver", ordReceiver);
+session.setAttribute("ordRcvPhone", ordRcvPhone);
     
 %>
         <form name="form" method="post" action="OrderOk.jsp">

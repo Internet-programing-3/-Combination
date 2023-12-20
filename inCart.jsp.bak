@@ -11,8 +11,8 @@
 </head>
 <body>
 <%
-    String userId = (String)session.getAttribute("userId"); 
-    if (userId == null) {
+    String myid = (String)session.getAttribute("userId"); 
+    if (myid == null) {
 %>
     <center>
         <br><br><br>

@@ -63,7 +63,7 @@ total = total + amount;
 
 
 <%
-String userId = (String)session.getAttribute("userId"); // ( , ) 로그인했었던 주문자 정보 즉 아이디
+String myid = (String)session.getAttribute("sid"); // ( , ) 로그인했었던 주문자 정보 즉 아이디
 
 // (2) - 주문자 정보 출력 회원 테이블 정보 출력
 String jsql4 = "select name, phone from user where userId = ?";

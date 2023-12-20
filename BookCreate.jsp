@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=euc-kr" pageEncoding="euc-kr"%>
-<%@ page import="java.io.*, java.util.UUID" %>
 
 <html>
 <head>
@@ -8,12 +7,9 @@
 <body>
     <center>
         <font color="blue" size="6"><b>[도서 등록]</b></font>
-        <form method="post" action="BookCreateResult.jsp" enctype="multipart/form-data">
+        <form method="post" action="BookCreateResult.jsp">
             <table border="2" cellpadding="10" style="font-size:10pt;font-family:맑은 고딕">
-                <tr>
-                    <td>도서 이미지 업로드 :</td>
-                    <td><input type="file" name="bookImgFile"></td>
-                </tr>
+               
                 <tr>
                     <td>카테고리분류 :</td>
                     <td>
@@ -23,7 +19,7 @@
                             <option value="국내 도서">국내 도서</option>
                             <option value="해외 도서">해외 도서</option>
                         </select>
-                        <p>
+                      	<p>
                     </td>
                 </tr>
                 <tr>
@@ -62,7 +58,6 @@
                     <td>재고수량:</td>
                     <td><input type="text" name="bookStock"> 권</td>
                 </tr>
-                <!-- 추가된 항목 -->
                 <tr>
                     <td>도서 리뷰:</td>
                     <td><textarea name="bookReview" rows="5" cols="30"></textarea></td>

@@ -38,12 +38,12 @@
 				%>
 				<script>
 					alert("회원탈퇴가 완료되었습니다.");
-					window.location.href = "<%= request.getContextPath() %>Logout.jsp";
+					window.location.href = "<%= request.getContextPath() %>/Logout.jsp";
 				</script>
 			<% }else{	// 실패 %>
 				<script>
 					alert("비밀번호가 틀렸습니다.");
-					window.location.href = "<%= request.getContextPath() %>DeleteUser.jsp";
+					window.location.href = "<%= request.getContextPath() %>/DeleteUser.jsp";
 				</script>
 			<% }
 			

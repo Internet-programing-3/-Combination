@@ -82,12 +82,14 @@
 %>
 		
 		</a></div>
-		<!-- 검색바 -->
-		<div class="searchMain">
-			<img src="images/LogoIcon.png" alt="로고아이콘">
-			<input type="text">
-			<button type="button" alt="검색 버튼">검색</button>
-		</div>
+  <!-- 검색바 -->
+      <div class="searchMain">
+         <img src="images/LogoIcon.png" alt="로고아이콘">
+         <form method="post" action="Search.jsp">
+            <input type="text" name="bookName">
+         <button type="submit" alt="검색 버튼">검색</button>
+         </form>
+      </div>
 		<!-- 마이페이지, 장바구니, 로그인/로그아웃 버튼 -->
 		<div>
 			<!-- 로그인 -->

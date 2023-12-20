@@ -24,9 +24,14 @@
         String userId = (String)session.getAttribute("userId");
         // 주문정보 테이블에 저장
         String oName = request.getParameter("name");
-		String ordReceiver = request.getParameter("ordReceiver");
-		String ordRcvAddress = request.getParameter("ordRcvAddress");
-		String ordRcvPhone = request.getParameter("ordRcvPhone");
+String ordRcvAddress = request.getParameter("ordRcvAddress");
+String ordReceiver = request.getParameter("ordReceiver");
+String ordRcvPhone = request.getParameter("ordRcvPhone");
+
+// 세션에 값 저장
+session.setAttribute("ordRcvAddress", ordRcvAddress);
+session.setAttribute("ordReceiver", ordReceiver);
+session.setAttribute("ordRcvPhone", ordRcvPhone);
 		String oPay = request.getParameter("ordPay"); // 수정된 부분: "pay" -> "bank"
 
 

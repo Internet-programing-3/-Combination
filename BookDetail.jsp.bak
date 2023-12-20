@@ -189,6 +189,7 @@
 				<p>주문수량 : <input type="number" name="#" value="1"> 권</p>
 				<%if(bookStock <= 10){ out.print("<p class='stock'>(남은 재고: " + bookStock + "권)</p>"); }%>
 				<a href="inCart.jsp"><button class="cart">장바구니 담기</button></a>
+				<a href="#"><button class="buy">바로 구매</button></a>
 			</div>
 		</section>
 		<section class="DetailTwo">

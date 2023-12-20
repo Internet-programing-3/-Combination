@@ -58,11 +58,14 @@
 				%>
 			</a>
 		</div>
-		<div class="searchMain">
-			<img src="images/LogoIcon.png" alt="로고아이콘">
-			<input type="text">
-			<button type="button" alt="검색 버튼">검색</button>
-		</div>
+		  <!-- 검색바 -->
+      <div class="searchMain">
+         <img src="images/LogoIcon.png" alt="로고아이콘">
+         <form method="post" action="Search.jsp">
+            <input type="text" name="bookName">
+         <button type="submit" alt="검색 버튼">검색</button>
+         </form>
+      </div>
 		<div>
 			<%
 				if (session.getAttribute("userId") == null) {

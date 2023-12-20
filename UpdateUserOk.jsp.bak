@@ -31,28 +31,28 @@ try {
 		Class.forName("org.gjt.mm.mysql.Driver"); 
  	 Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD);
 
-	 String jsql = "INSERT INTO User (userId, password, name, phone, email, birth, gender) VALUES (?,?,?,?,?,?,?)";	
+	 String jsql = "update User set password=?, name=?, phone=?, email=?, birth=?, gender=? where userId=?";	
 
 	 PreparedStatement pstmt  = con.prepareStatement(jsql);
-	 pstmt.setString(1,id);
-	 pstmt.setString(2,password);
-	 pstmt.setString(3,name);
-	 pstmt.setString(4,hp);
-	 pstmt.setString(5,email);
-	 pstmt.setString(6,birth);
-	 pstmt.setString(7,sex);
+	 pstmt.setString(1,password);
+	 pstmt.setString(2,name);
+	 pstmt.setString(3,hp);
+	 pstmt.setString(4,email);
+	 pstmt.setString(5,birth);
+	 pstmt.setString(6,sex);
+	 pstmt.setString(7,id);
 
 	 int result = pstmt.executeUpdate();
 	 
 	if(result == 1){ // 성공 %>
 		<script>
-			alert("회원가입에 성공하였습니다.");
-			window.location.href = "<%= request.getContextPath() %>Login.jsp";
+			alert("회원 정보 수정에 성공하였습니다.");
+			window.location.href = "<%= request.getContextPath() %>/Logout.jsp";
 		</script>
 	<%	} else{ // 실패		%>
 		<script>
-			alert("회원가입에 실패하였습니다.");
-			window.location.href = "<%= request.getContextPath() %>SignUp.jsp";
+			alert("회원 정보 수정에 실패하였습니다.");
+			window.location.href = "<%= request.getContextPath() %>/UpdateUser.jsp";
 		</script>
 	<%	}
 	 

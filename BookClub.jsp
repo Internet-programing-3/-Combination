@@ -130,12 +130,14 @@
                 }
             %>
         </a></div>
-        <!-- 검색바 -->
-        <div class="searchMain" style="border-color: #FF8787;">
-            <img src="images/LogoIconBC.png" alt="로고아이콘">
-            <input type="text">
-            <button type="button" style="border-color: #FF8787; background-color: #FF8787;" alt="검색 버튼">검색</button>
-        </div>
+          <!-- 검색바 -->
+      <div class="searchMain">
+         <img src="images/LogoIcon.png" alt="로고아이콘">
+         <form method="post" action="Search.jsp">
+            <input type="text" name="bookName">
+         <button type="submit" alt="검색 버튼">검색</button>
+         </form>
+      </div>
         <!-- 마이페이지, 장바구니, 로그인/로그아웃 버튼 -->
         <div>
             <!-- 로그인 -->
@@ -242,14 +244,12 @@
                                     String title = rs2.getString("title");
                                     String userId = rs2.getString("userId");
                                     String created_at = rs2.getString("created_at");
-                                    int hits = rs2.getInt("hits");
-                    %>
+                    %>	
                     <tr>
                         <td class="Num"><%=postId%></td>
                         <td class="Title" title="제목"><a href="BookClubDetail.jsp?postId=<%=postId%>"><%=title%></a></td>
                         <td class="Writer"><a href="javascript:void(0);"><%=userId%></a></td>
                         <td class="Date"><%=created_at%></td>
-                        <td class="View"><%=hits%></td>
                     </tr>
                     <%
                                         cursor++;
@@ -281,14 +281,7 @@
 			</article>
 		</section>
 	</main>
-<%
-rs2.close();
-pstmt3.close();
-rs.close();
-pstmt2.close();
-con.close();
-}
-%>
+
 
 
 	<!-- footer 북클럽 Ver. -->

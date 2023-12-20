@@ -207,6 +207,9 @@
             <a href="inCart.jsp" onClick="inCart('<%=bookId%>', $('#qty_<%=bookId%>').val())">
                 <button class="cart">장바구니 담기</button>
             </a>
+
+					<a href="#"><button class="buy">바로 구매</button></a>
+				
 				</div>
 			</article>
 			<%

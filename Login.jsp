@@ -35,8 +35,7 @@
 	<main class="LoginOne">
 		<ul class="btnLogin">
 			<li class="On"><a href="javascript:void(0);">회원 로그인</a></li>
-			<li><a href="javascript:void(0);">비회원 로그인</a></li>
-		</ul>
+					</ul>
 			<!-- 회원 로그인 -->
 			<div class="contLO On">
 				<form method="post" action="LoginOk.jsp">
@@ -50,27 +49,9 @@
 						<label id="saveID">아이디 저장하기</label>
 					</div>
 					<div class="subLO">
-						<button type="button" title="아이디/비밀번호 찾기" alt="아이디/비밀번호 찾기 버튼">아이디/비밀번호 찾기</button>
-						<a href="SignUp.jsp"><button type="button" title="회원가입" alt="회원가입 버튼">회원가입</button></a>
+						<a href="FindUser.jsp"><button type="button" title="아이디/비밀번호 찾기" alt="아이디/비밀번호 찾기 버튼">아이디/비밀번호 찾기</button></a>						<a href="SignUp.jsp"><button type="button" title="회원가입" alt="회원가입 버튼">회원가입</button></a>
 					</div>
 				</form>
-			</div>
-			<!-- 비회원 로그인 -->
-			<div class="contLO">
-				<div class="inputLO">
-					<div class="mainLO">
-					<input type="text" style="border-radius: 5px 5px 0 0;" name="userid" title="주문번호 입력" placeholder="주문번호를 입력하세요">
-					<input type="password" style="border-radius: 0 0 5px 5px;" name="password" title="비밀번호 입력" placeholder="비밀번호를 입력하세요">
-					<button type="submit" title="주문조회" alt="주문조회 버튼">조회</button>
-				</div>
-				<div class="optLO">
-					<input type="checkbox" id="saveID" title="주문번호 저장" checked>
-					<label id="saveID">주문번호 저장하기</label>
-				</div>
-				<div class="subLO">
-					<button type="button" title="주문번호 찾기" alt="주문번호 찾기 버튼">주문번호 찾기</button>
-					<a href="SignUp.jsp"><button type="button" title="회원가입" alt="회원가입 버튼">회원가입</button></a>
-				</div>
 			</div>
 	</main>
 

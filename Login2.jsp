@@ -22,15 +22,6 @@
             <div style="border-bottom: solid 2px; text-align: center; padding: 20px;">비회원로그인</div></a>
         </main>
 
-        <!-- 두번째 메뉴들 ( 아이디, 비밀번호 ) -->
-        <main style="display: flex; flex-direction: column; align-items: center; margin-top: 5vh;">
-            <div style="display: flex; border: solid 1px; width: 40vw; height: 6vh; margin-bottom: 15px;">
-                <input type="text" style="width: 40vw; height: 5.7vh; border: none;" placeholder="주문번호를 입력하세요">
-            </div>
-            <div style="display: flex; border: solid 1px; width: 40vw; height: 6vh;">
-                <input type="text" style="width: 40vw; height: 5.7vh; border: none;" placeholder="비밀번호를 입력하세요">
-            </div>
-        </main>
 
         <!-- 세번째 메뉴들 ( 로그인, 아이디/비밀번호 찾기, 회원가입 ) -->
         <main style="display: flex; flex-direction: column; align-items: center; margin-top: 5vh;">

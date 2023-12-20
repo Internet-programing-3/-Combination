@@ -36,29 +36,31 @@
 		</script>
 	</head>
 	<body>
-		<%
-			// 인코딩
-			request.setCharacterEncoding("UTF-8");
-			// DB 연결
-			String DB_URL = "jdbc:mysql://localhost:3306/internetproject";
-			String DB_ID = "multi";
-			String DB_PASSWORD = "abcd";
-			Class.forName("org.gjt.mm.mysql.Driver"); 
-			Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD);
-	
-			String postId = request.getParameter("postId");
-	
-			String jsql = "select * from clubpost where postId = ?";
-	
-			PreparedStatement pstmt = con.prepareStatement(jsql);
-			pstmt.setInt(1, Integer.parseInt(postId));
-			ResultSet rs = pstmt.executeQuery();
-	
-			if(!rs.wasNull()) {
-				rs.next();
-				String title = rs.getString("title");
-				String content = rs.getString("content").trim();
-		%>
+<%
+    // 인코딩
+    request.setCharacterEncoding("UTF-8");
+    // DB 연결
+    String DB_URL = "jdbc:mysql://localhost:3306/internetproject";
+    String DB_ID = "multi";
+    String DB_PASSWORD = "abcd";
+    Class.forName("org.gjt.mm.mysql.Driver"); 
+    Connection con = DriverManager.getConnection(DB_URL, DB_ID, DB_PASSWORD);
+
+    String postId = request.getParameter("postId");
+
+    // postId가 null이거나 비어 있는지 확인
+    if (postId != null && !postId.isEmpty()) {
+        String jsql = "select * from clubpost where postId = ?";
+        
+        PreparedStatement pstmt = con.prepareStatement(jsql);
+        pstmt.setInt(1, Integer.parseInt(postId));
+        ResultSet rs = pstmt.executeQuery();
+        
+        if(rs.next()) {
+            String title = rs.getString("title");
+            String content = rs.getString("content").trim();
+%>
+
 	
 		<!-- header (로고) 북클럽 Ver. -->
 		<header>
@@ -85,12 +87,16 @@
 			</form>
 		</main>
 	
-		<%
-			}
-			rs.close();
-			pstmt.close();
-			con.close();
-		%>
+<%
+        }
+        rs.close();
+        pstmt.close();
+    } else {
+        // postId가 null이거나 비어 있으면 처리할 내용 추가
+        // 예를 들어, 어떤 오류 메시지를 출력하거나, 다른 페이지로 리다이렉트할 수 있습니다.
+    }
+    con.close();
+%>
 	
 	</body>
 	</html>

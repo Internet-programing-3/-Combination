@@ -47,12 +47,12 @@ try {
 	if(result == 1){ // 성공 %>
 		<script>
 			alert("회원가입에 성공하였습니다.");
-			window.location.href = "<%= request.getContextPath() %>Login.jsp";
+			window.location.href = "<%= request.getContextPath() %>/Login.jsp";
 		</script>
 	<%	} else{ // 실패		%>
 		<script>
 			alert("회원가입에 실패하였습니다.");
-			window.location.href = "<%= request.getContextPath() %>SignUp.jsp";
+			window.location.href = "<%= request.getContextPath() %>/SignUp.jsp";
 		</script>
 	<%	}
 	 

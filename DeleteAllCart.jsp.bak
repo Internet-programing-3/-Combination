@@ -36,9 +36,7 @@ try {
     </a>
 </header>
 
-<!-- nav1 ( 오늘의 책, 검색창, 마이페이지, 로그인 ) -->
 <nav class="navMainOne">
-    <!-- 오늘의 책 -->
     <div class="todayMain">
         <a href="#">
             <%
@@ -70,16 +68,13 @@ try {
             %>
         </a>
     </div>
-    <!-- 검색바 -->
     <div class="searchMain">
         <img src="images/LogoIcon.png" alt="로고아이콘">
         <input type="text">
         <button type="button" alt="검색 버튼">검색</button>
     </div>
 
-    <!-- 마이페이지, 장바구니, 로그인/로그아웃 버튼 -->
     <div>
-        <!-- 로그인 -->
         <%
             if (session.getAttribute("userId") == null) {
         %>
@@ -92,7 +87,6 @@ try {
         <a href="Login.jsp">
             <img src="images/logIn.png" style="width: 50px; height: 50px;" title="로그인" alt="회원가입/로그인">
         </a>
-        <!-- 로그아웃 -->
         <%
             } else {
         %>
@@ -110,61 +104,52 @@ try {
         %>
     </div>
 </nav>
+<%
+String ordNoString = request.getParameter("ordNo");
+int ordNo = (ordNoString != null && !ordNoString.isEmpty()) ? Integer.parseInt(ordNoString) : 0;
+
+String sql = "SELECT ordReceiver, ordRcvAddress, ordRcvPhone FROM orderInfo WHERE ordNo = ?";
+PreparedStatement pstmt1 = con.prepareStatement(sql);
+pstmt1.setInt(1, ordNo);
+
+ResultSet rs1 = pstmt1.executeQuery();
+
+if (rs1.next()) {
+    String ordReceiver = rs1.getString("ordReceiver");
+    String ordRcvAddress = rs1.getString("ordRcvAddress");
+    String ordRcvPhone = rs1.getString("ordRcvPhone");
+%>
 
 <main class="orderMain">
-    <!-- 주문 처리 완료 내용 -->
     <div class="orderHeader">
         <p>주문이 완료되었습니다!</p>
     </div>
- <!-- 주문자 정보 -->
-    <section class="orderInfo">
-        <%
-            String ordNoString = request.getParameter("ordNo");
-            int ordNo = (ordNoString != null && !ordNoString.isEmpty()) ? Integer.parseInt(ordNoString) : 0;
+    <article class="shopList">
+        <table>
+            <tr class="cartHeader">
+                <th colspan="2">주문자 정보</th>
+            </tr>
+            <tr class="cartCont">
+                <th>주문번호</th>
+                <td><%= ordNo %></td>
+            </tr>
+            <tr class="cartCont">
+                <th>수령인</th>
+                <td><%= ordReceiver %></td>
+            </tr>
+            <tr class="cartCont">
+                <th>주소</th>
+                <td><%= ordRcvAddress %></td>
+            </tr>
+            <tr class="cartCont">
+                <th>연락처</th>
+                <td><%= ordRcvPhone %></td>
+            </tr>
+        </table>
+    </article>
 
-            String sql = "SELECT ordReceiver, ordRcvAddress, ordRcvPhone FROM orderInfo WHERE ordNo = ?";
-            PreparedStatement pstmt1 = con.prepareStatement(sql);
-            pstmt1.setInt(1, ordNo);
-
-            ResultSet rs1 = pstmt1.executeQuery();
-
-            if (rs1.next()) {
-                String ordReceiver = rs1.getString("ordReceiver");
-                String ordRcvAddress = rs1.getString("ordRcvAddress");
-                String ordRcvPhone = rs1.getString("ordRcvPhone");
-        %>
-        <article class="shopList">
-            <table>
-                <tr class="cartHeader">
-                    <th colspan="2">주문자 정보</th>
-                </tr>
-                <tr class="cartCont">
-                    <th>주문번호</th>
-                    <td><%= ordNo %></td>
-                </tr>
-                <tr class="cartCont">
-                    <th>수령인</th>
-                    <td><%= ordReceiver %></td>
-                </tr>
-                <tr class="cartCont">
-                    <th>주소</th>
-                    <td><%= ordRcvAddress %></td>
-                </tr>
-                <tr class="cartCont">
-                    <th>연락처</th>
-                    <td><%= ordRcvPhone %></td>
-                </tr>
-            </table>
-        </article>
-        <%
-            }
-            rs1.close();
-            pstmt1.close();
-        %>
-    </section>
-
-    <!-- 주문 상품 목록 -->
-    <section class="orderProducts">
+    <!-- 주문 상품 목록 출력 -->
+    <article class="shopList">
         <%
             String jsql2 = "SELECT bookId, ctQty FROM cart WHERE ctNo = ?";
             PreparedStatement pstmt2 = con.prepareStatement(jsql2);
@@ -186,19 +171,17 @@ try {
                 int amount = prdPrice * ctQty;
                 total += amount;
         %>
-        <article class="shopList">
-            <table>
-                <tr class="cartHeader">
-                    <th colspan="4">주문 상품 : <%= ctQty %> 개</th>
-                </tr>
-                <tr class="shopCont">
-                    <td><img src="<%= bookImg %>.jpg"></td>
-                    <td align="left"><%= prdName %></td>
-                    <td><%= ctQty %>권</td>
-                    <td><%= amount %>원</td>
-                </tr>
-            </table>
-        </article>
+        <table>
+            <tr class="cartHeader">
+                <th colspan="4">주문 상품 : <%=ctQty %> 개</th>
+            </tr>
+            <tr class="shopCont">
+                <td><img src="<%= bookImg %>.jpg"></td>
+                <td align="left"><%= prdName %></td>
+                <td><%= ctQty %>권</td>
+                <td><%= amount %>원</td>
+            </tr>
+        </table>
         <%
                 rs3.close();
                 pstmt3.close();
@@ -206,51 +189,19 @@ try {
             rs2.close();
             pstmt2.close();
         %>
-    </section>
+    </article>
 
-    <!-- 결제 금액 -->
-    <section class="orderSummary">
-        <div class="orderEnd">
-            <p class="EndOne">총 결제 금액</p>
-            <p class="EndTwo"><%= total %>원</p>
-        </div>
-    </section>
+    <div class="orderEnd">
+        <p class="EndOne">총 결제 금액</p>
+        <p class="EndTwo"><%= total %>원</p>
+    </div>
 </main>
 
-
-<!-- 페이지 이동 -->
-<div class="pageMove">
-    <p><a href="MyPage.jsp">&lt; 메인으로 돌아가기</a></p>
-    <p><a href="MyPage.jsp">마이페이지로 이동하기 &gt;</a></p>
-</div>
-
-<!-- footer -->
-<footer>
-    <div class="notices">
-        <ul>
-            <li><h4>공지사항</h4></li>
-            <li><a href="javascript:void(0);">개인정보 처리방침 변경안내</a></li>
-            <li><a href="javascript:void(0);"><h4>더보기+</h4></a></li>
-            <li><h4>이벤트</h4></li>
-            <li><a href="javascript:void(0);">11월 북클럽 독후감대회 우승자 발표</a></li>
-            <li><a href="javascript:void(0);"><h4>더보기+</h4></a></li>
-        </ul>
-    </div>
-    <div class="footerMain">
-        <img src="images/Logo.jpg">
-        <div>
-            <p>회사소개 | 이용약관 | 개인정보처리방침 | 청소년보호정책 | 대량주문안내 | 협력사여러분 | 채용정보 | 광고소개</p>
-            <p>
-                대표이사 : 서병덕 | 남서울대학교 멀티미디어학과 | 사업자등록번호 : 181-001-2002</br>
-                대표전화 : 1588-0000 (발신자 부담전화) | FAX : 0000-112-505 (지역번호 공통) | 인터넷프로그래밍2 : 제 2023호
-            </p>
-        </div>
-    </div>
-</footer>
-</body>
-</html>
 <%
+}
 
+rs1.close();
+pstmt1.close();
 } catch (Exception e) {
     out.println("일반 오류: " + e.getMessage());
 } finally {
@@ -263,3 +214,5 @@ try {
     }
 }
 %>
+</body>
+</html>

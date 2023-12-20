@@ -47,12 +47,12 @@ try {
 	if(result == 1){ // 성공 %>
 		<script>
 			alert("회원 정보 수정에 성공하였습니다.");
-			window.location.href = "<%= request.getContextPath() %>/Logout.jsp";
+			window.location.href = "<%= request.getContextPath() %>Logout.jsp";
 		</script>
 	<%	} else{ // 실패		%>
 		<script>
 			alert("회원 정보 수정에 실패하였습니다.");
-			window.location.href = "<%= request.getContextPath() %>/UpdateUser.jsp";
+			window.location.href = "<%= request.getContextPath() %>UpdateUser.jsp";
 		</script>
 	<%	}
 	 

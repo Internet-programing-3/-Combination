@@ -31,7 +31,7 @@
 		
 			session.setAttribute("userId", userid);
 			session.setAttribute("name", name);
-			response.sendRedirect(request.getContextPath() + "Mainpage.jsp");
+			response.sendRedirect(request.getContextPath() + "/Mainpage.jsp");
 			} else{ // 실패 %>
 				<script>
 					alert("아이디 또는 비밀번호가 맞지않습니다.");
